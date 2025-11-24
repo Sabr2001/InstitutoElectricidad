@@ -1,0 +1,119 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Saira:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* Variables institucionales ICE */
+:root{
+    --primario: #003366;       /* Azul institucional ICE */
+    --secundario: #F2F2F2;     /* Gris claro más cálido */
+    --enfasis: #FFB400;        /* Amarillo ICE (más suave que naranja puro) */
+    --neutro1: #FFFFFF;        /* Blanco */
+    --neutro2: #000000;        /* Negro */
+    --fuente: "Saira", sans-serif;
+    --logo: url("../img/logo-ice.jpg");
+    --tamanio-base: 16px;
+}
+
+/* Reset y base */
+*{
+    font-family: var(--fuente);
+    font-size: var(--tamanio-base); 
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Tipografía */
+h1{
+    font-size: 3.2em;
+    font-weight: 700;
+}
+h2{
+    font-size: 2.5em;
+    font-weight: 600;
+}
+h3{
+    font-size: 1.8em;
+    font-weight: 500;
+}
+h1,h2,h3,h4,h5,h6{
+    color: var(--primario) !important;
+}
+
+/* Secciones */
+section{
+    padding: 2em 0;
+    border-bottom: 2px solid var(--primario);
+    background-color: var(--neutro1);
+}
+
+/* Colores institucionales */
+.bgColorPrimario{
+    background-color: var(--primario) !important;
+}
+.bgColorSecundario{
+    background-color: var(--secundario) !important;
+}
+.textColorEnfasis{
+    color: var(--enfasis) !important;
+}
+.textColorPrimario{
+    color: var(--primario) !important;
+}
+.textColorSecundario{
+    color: var(--secundario) !important;
+}
+.textColorNeutro1{
+    color: var(--neutro1) !important;
+}
+
+/* Botones y enlaces */
+.card a,
+.btn {
+    background-color: var(--primario);
+    color: var(--neutro1);
+    border: none;
+    transition: all 0.3s ease;
+}
+.card a:hover,
+.btn:hover {
+    background-color: var(--enfasis);
+    color: var(--neutro2);
+    border: 1px solid var(--primario);
+}
+
+/* Menú principal */
+#menu-principal a{
+    color: var(--neutro1);
+    font-weight: 500;
+}
+#menu-principal .active,
+#menu-principal a:hover{
+    padding-bottom: 3px;
+    font-weight: 700;
+    border-bottom: 2px solid var(--enfasis);
+}
+
+/* Carrusel */
+.carousel-inner img{
+    height: 90vh;
+    object-fit: cover;
+}
+
+/* Footer */
+footer{
+    background-color: var(--secundario);
+    color: var(--primario);
+}
+footer h3{
+    font-size: 1.4em;
+    margin-bottom: 0.5em;
+}
+footer a{
+    color: var(--primario);
+    text-decoration: none;
+}
+footer a:hover{
+    color: var(--enfasis);
+    text-decoration: underline;
+}
+

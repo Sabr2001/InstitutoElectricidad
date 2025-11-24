@@ -1,0 +1,10 @@
+@import url("main.css");
+
+body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        canvas {
+            margin: 20px 0;
+        }
