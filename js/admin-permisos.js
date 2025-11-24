@@ -133,7 +133,7 @@ function cargarDatos(res) {
         filas += `
             <tr>
                 <td>${p.id}</td>
-                <td>${p.nombrePermiso}</td>
+                <td>${p.nombre}</td>
                 <td>${p.descripcion}</td>
                 <td>${p.habilitado == 1 ? "Si" : "No"}</td>
                 <td>
