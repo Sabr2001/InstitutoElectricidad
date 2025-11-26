@@ -1,4 +1,5 @@
 <?php include "shared/header.php" ?>
+<link rel="stylesheet" href="css/acerca.css">
 
 <main>
     <section class="row mt-5 justify-content-evenly align-items-center">
@@ -36,6 +37,50 @@
             <p><strong>kölbi:</strong> Marca comercial del ICE para servicios de telecomunicaciones móviles, fijas e internet.</p>
         </div>
     </section>
+
+    <section class="testimonios">
+        <h3 class="col-sm-12 text-center mb-4">Testimonios</h3>
+
+        <div class="contenedor-testimonios">
+
+            <div class="testimonio-usuario">
+                <p class="mensaje">
+                    “La plataforma funciona excelente, ahora puedo ver mis facturas sin tener que llamar ni ir de forma presencial.”
+                </p>
+                <h2 class="cliente">—Jose Monge, San Jose</h2>
+            </div>
+
+            <div class="testimonio-usuario">
+                <p class="mensaje">
+                    “Reporté un error en mi lectura y recibí respuesta por correo el mismo día, el servicio al cliente es muy eficiente.”
+                </p>
+                <h2 class="cliente">—Luis Gonzalez, Cartago</h2>
+            </div>
+
+            <div class="testimonio-usuario">
+                <p class="mensaje">
+                    “Todo es muy intuitivo, pude crear mi usuario y revisar mi historial sin ayuda de nadie.”
+                </p>
+                <h2 class="cliente">—Santiago Bonilla, Limón</h2>
+            </div>
+
+            <div class="testimonio-usuario">
+                <p class="mensaje">
+                    “La nueva plataforma nos permite descargar facturas, comparar meses anteriores administrar mejor nuestros gastos operativos.”
+                </p>
+                <h2 class="cliente">—Carlos Alquitran, Puntarenas</h2>
+            </div>
+
+            <div class="testimonio-usuario">
+                <p class="mensaje">
+                    “Me sorprendió lo sencilla que es la página, incluso desde el celular puedo consultar mis facturas.”
+                </p>
+                <h2 class="cliente">—Nohemi Saragoza, Guanacaste</h2>
+            </div>
+
+        </div>
+    </section>
+
 </main>
 
 <?php include "shared/footer.php" ?>

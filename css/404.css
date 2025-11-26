@@ -1,0 +1,27 @@
+@import url(main.css);
+
+.img-404 {
+    display: block;
+    margin: 0 auto;
+    width: 350px;
+    max-width: 90%;
+}
+
+/* ajuste para pantallas grandes */
+@media (min-width: 1200px) {
+    .img-404 {
+        width: 900px;
+    }
+}
+/* ajuste para tablets */
+@media (max-width: 768px) {
+    .img-404 {
+        width: 500px;
+    }
+}
+/* ajuste para celulares */
+@media (max-width: 480px) {
+    .img-404 {
+        width: 420px;
+    }
+}
