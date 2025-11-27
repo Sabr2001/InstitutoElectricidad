@@ -1,32 +1,39 @@
-<?php include "shared/header.php" ?>
+<?php 
+    include "shared/auth.php";
+    include "shared/header.php";
+?>
 
-<main class="container mt-5">
-    <h1 class="text-center mb-4">Cátalogo Permisos</h1>
+<div class="row">
+<?php include "shared/aside.php";?>
+    <main class="col">
+        <h1 class="text-center mt-4 mb-4">Cátalogo Permisos</h1>
+        <div class="container-fluid">
+            <!-- Botón para agregar nuevo registro -->
+            <div class="d-flex justify-content-end mb-3">
+                <button id="btnNuevo" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalProducto">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+            </div>
 
-    <!-- Botón para agregar nuevo registro -->
-    <div class="d-flex justify-content-end mb-3">
-        <button id="btnNuevo" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalProducto">
-            <i class="fa-solid fa-plus"></i>
-        </button>
-    </div>
+            <!-- Tabla -->
+            
+            <table class="table table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre Permiso</th>
+                        <th>Descripción</th>
+                        <th>Habilitado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="dataTable">
 
-    <!-- Tabla -->
-    <table class="table table-striped">
-        <thead class="table-dark">
-            <tr>
-                <th>Id</th>
-                <th>Nombre Permiso</th>
-                <th>Descripción</th>
-                <th>Habilitado</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody id="dataTable">
-
-        </tbody>
-    </table>
-</main>
-
+                </tbody>
+            </table>
+        </div>
+    </main>
+</div>
 <!-- Modal -->
 <div class="modal fade" id="modalProducto" tabindex="-1" aria-labelledby="crudModalLabel" aria-hidden="true">
     <div class="modal-dialog">

@@ -67,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <?php include "shared/header.php"; ?>
 
-<main class="row justify-content-evenly mt-5">
+<main class="row justify-content-evenly m-5 pb-5">
     <h1 class="col-sm-12 text-center mb-4">Acceso a la Agencia Virtual</h1>
 
     <div class="col-sm-6 col-md-4">

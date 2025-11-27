@@ -1,7 +1,29 @@
 var accion = 1;
 getListaPermisos();
 
+$("#crudProducto").validate({
+    rules: {
+        nombrePermiso: {
+            required: true,
+        },
+        descripcion: {
+            required: true
+        }
+    },
+    messages: {
+        nombrePermiso: {
+            required: "Campo asunto es obligatorio",
+        },
+        descripcion: {
+            required: "Campo nombre es obligatorio"
+        }
+    }
+});
+
 $("#btnGuardar").click(function (e) {
+     if (!$("#crudProducto").valid()) 
+        return;
+    
     if (accion == 1) {
         Guardar();
     } else {
@@ -150,3 +172,5 @@ function cargarDatos(res) {
 
     $("#dataTable").html(filas);
 }
+
+

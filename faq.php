@@ -1,6 +1,6 @@
 <?php include "shared/header.php" ?>
 
-<main class="row justify-content-evenly">
+<main class="row justify-content-evenly pb-5 mb-5">
     <h1 class="col-sm-12 text-center">Preguntas frecuentes - ICE</h1>
     <!-- acordeon -->
     <div class="accordion col-sm-8" id="acordionFaq">
