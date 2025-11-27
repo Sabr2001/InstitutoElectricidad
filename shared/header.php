@@ -2,8 +2,8 @@
 $archivo = basename($_SERVER['PHP_SELF']);
 $nombreArchivo = explode(".", $archivo)[0];
 var_dump($nombreArchivo);
-    require_once "shared/auth.php";
-    $pass = autenticado();
+require_once "shared/auth.php";
+$pass = autenticado();
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +16,7 @@ var_dump($nombreArchivo);
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/c3c613e268.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="css/<?php echo $nombreArchivo ?>.css"> 
+    <link rel="stylesheet" href="css/<?php echo $nombreArchivo ?>.css">
 </head>
 
 <body class="container-fluid p-0">
@@ -49,20 +49,24 @@ var_dump($nombreArchivo);
                         <li class="nav-item">
                             <a class="nav-link <?php if ($nombreArchivo == "contactenos") echo 'active' ?>" href="servicios.php">Servicios</a>
                         </li>
-                        <l class="nav-item">
+                        <li class="nav-item">
+                            <a class="nav-link <?php if ($nombreArchivo == "Soporte al Cliente") echo 'active' ?>" href="contacto_cliente.php">Soporte al Cliente</a>
+                        </li>
+                        <li class="nav-item">
                             <?php if ($pass): ?>
                                 <a class="nav-link <?php if ($nombreArchivo == "dashboard") echo 'active' ?>" href="dashboard.php">
                                     Agencia Virtual
                                 </a>
-                            <?php else:?>
+                            <?php else: ?>
                                 <a class="nav-link <?php if ($nombreArchivo == "login") echo 'active' ?>" href="login.php">
                                     Agencia Virtual
                                 </a>
-                            <?php endif;?>
+                            <?php endif; ?>
                         </li>
+
                     </ul>
                 </div>
-                
+
                 <?php if ($pass): ?>
                     <a href="logout.php" class="btn btn-danger btn-l">Cerrar sesión</a>
                 <?php endif; ?>
