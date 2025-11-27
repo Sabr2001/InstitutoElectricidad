@@ -1,2 +1,2 @@
 RewriteEngine On
-ErrorDocument 404 /MinisterioAguas/404.php
+ErrorDocument 404 /InstitutoElectricidad/404.php
