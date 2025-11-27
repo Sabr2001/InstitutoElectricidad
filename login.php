@@ -1,10 +1,5 @@
 <?php
-session_start();
-
-if (isset($_SESSION['correo'])) {
-    header("Location: dashboard.php");
-    exit;
-}
+    require_once "shared/auth.php";
 
 $error = "";
 

@@ -128,14 +128,3 @@ footer h3{
     font-weight: bold;
 }
 
-.sidebar-ice {
-    width: 100%;
-}
-
-@media (min-width: 768px) {
-    .sidebar-ice {
-        width: 4.5rem;
-        min-height: 100vh;
-        align-items: stretch;
-    }
-}

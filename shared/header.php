@@ -1,7 +1,9 @@
 <?php
 $archivo = basename($_SERVER['PHP_SELF']);
 $nombreArchivo = explode(".", $archivo)[0];
-// var_dump($nombreArchivo);
+var_dump($nombreArchivo);
+    require_once "shared/auth.php";
+    $pass = autenticado();
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +29,7 @@ $nombreArchivo = explode(".", $archivo)[0];
                     <img src="img/icono.jpg" alt="Logo ICE" width="120" height="auto">
                 </a>
 
-               <button class="navbar-toggler bgColorSecundario" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler bgColorSecundario" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -48,14 +50,22 @@ $nombreArchivo = explode(".", $archivo)[0];
                             <a class="nav-link <?php if ($nombreArchivo == "contactenos") echo 'active' ?>" href="servicios.php">Servicios</a>
                         </li>
                         <l class="nav-item">
-                            <a class="nav-link <?php if ($nombreArchivo == "login") echo 'active' ?>" href="login.php">
-                                Agencia Virtual
-                            </a>
+                            <?php if ($pass): ?>
+                                <a class="nav-link <?php if ($nombreArchivo == "dashboard") echo 'active' ?>" href="dashboard.php">
+                                    Agencia Virtual
+                                </a>
+                            <?php else:?>
+                                <a class="nav-link <?php if ($nombreArchivo == "login") echo 'active' ?>" href="login.php">
+                                    Agencia Virtual
+                                </a>
+                            <?php endif;?>
                         </li>
                     </ul>
                 </div>
-                <a href="logout.php" class="btn btn-danger btn-l">Cerrar sesión</a>
-
+                
+                <?php if ($pass): ?>
+                    <a href="logout.php" class="btn btn-danger btn-l">Cerrar sesión</a>
+                <?php endif; ?>
             </div>
 
         </nav>

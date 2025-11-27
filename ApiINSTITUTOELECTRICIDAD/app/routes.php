@@ -230,7 +230,7 @@ return function (App $app) {
             $res = $db->AutoExecute("lecturas",$fila, "UPDATE","id=$id");
         });
 
-                $app->delete('/borrarPermiso', function (Request $request, Response $response) {
+        $app->delete('/borrarLectura', function (Request $request, Response $response) {
             $response->getBody()->write('Borrando....');
             return $response;
         });
