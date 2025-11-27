@@ -1,8 +1,4 @@
-<?php 
-    session_start()
 
-?>
-<?php if(!empty(($_SESSION["correo"]))):?>
 <aside class="col-auto col-md-auto p-0 bg-body-tertiary min-vh-100 bgIceBackground sidebar-ice">
     <div class="d-flex flex-column flex-shrink-0 sidebar-ice" style="width: 4.5rem;">
         <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
@@ -43,4 +39,3 @@
         </div>
     </div>
 </aside>
-<?php endif;?>

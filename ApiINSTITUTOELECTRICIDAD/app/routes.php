@@ -213,6 +213,39 @@ return function (App $app) {
         });
     //---------------------Fin Login -------------------------------//
 
+    //---------------------Inicio Lecturas-------------------------//
+        $app->post('/guardarLectura', function (Request $request, Response $response) {
+            $fila = $request->getQueryParams();
+            $db = conexion();
+            $res = $db->AutoExecute("lecturas", $fila, "INSERT");
+            $db->Close();
+            $response->getBody()->write(strval($res));
+            return $response;
+        });
+
+        $app->put('/editLectura', function(Request $request, Response $response){
+            $fila = $request->getQueryParams();
+            $id = $fila["id"];
+            $db = conexion();
+            $res = $db->AutoExecute("lecturas",$fila, "UPDATE","id=$id");
+        });
+
+                $app->delete('/borrarPermiso', function (Request $request, Response $response) {
+            $response->getBody()->write('Borrando....');
+            return $response;
+        });
+
+        $app->get('/obtenerLecturaByNise/{nise}', function (Request $request, Response $response, $args) {
+            $nise = $args['nise'];
+            $sql = "SELECT * FROM lecturas where nise=$nise";
+            $db = conexion();
+            $db->SetFetchMode(ADODB_FETCH_ASSOC);
+            $res = $db->GetRow($sql);
+            $db->Close();
+            $response->getBody()->write((json_encode($res)));
+            return $response;
+        });
+    //---------------------Fin Lecturas ---------------------------//
     //Metodo para validar conexion 
     $app->get('/', function (Request $request, Response $response) {
         // Que se vea TODO mientras desarrollas
