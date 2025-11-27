@@ -289,7 +289,7 @@ return function (App $app) {
     });
 
     // --------------------Modulo de formulario de consultas ----------------------------//
-// recibe el correo del usuario, lo busca en la tabla clientes y devuleve el NISE asociado
+    // recibe el correo del usuario, lo busca en la tabla clientes y devuleve el NISE asociado
     $app->get('/getClienteByCorreo', function ($req, $res) {
         $correo = $_GET["correo"] ?? null;
         if (!$correo) {
@@ -301,7 +301,7 @@ return function (App $app) {
         $res->getBody()->write(json_encode($row ?: ["nise" => null]));
         return $res->withHeader('Content-Type', 'application/json');
     });
-// Recibe el payload que se envia desde el json y lo inserta en la tabla de contacto
+    // Recibe el payload que se envia desde el json y lo inserta en la tabla de contacto
     $app->post('/enviarContacto', function ($request, $response) {
         $params = $request->getParsedBody();
         $db = conexion();
@@ -318,7 +318,7 @@ return function (App $app) {
         $response->getBody()->write(json_encode(["success" => (bool)$success]));
         return $response->withHeader('Content-Type', 'application/json');
     });
-// Muestra las solicitudes enviadas por el cliente identificado por su correo
+    // Muestra las solicitudes enviadas por el cliente identificado por su correo
     $app->get('/getSolicitudesCliente', function ($req, $res) {
         $correo = $_GET["correo"] ?? null;
         if (!$correo) {
@@ -332,5 +332,33 @@ return function (App $app) {
     });
 
     // --------------------fin formulario de consultas ------------------------//
-    
+
+    // --------------------inicio formulario de facturas ------------------------//
+// Recibe el NISE y el periodo, busca la factura y devuelve la informacion del cliente y la factura
+    $app->get('/getFactura', function ($req, $res) {
+        $nise = $_GET["nise"] ?? null;
+        $periodo = $_GET["periodo"] ?? null;
+        if (!$nise || !$periodo) {
+            $res->getBody()->write(json_encode(["error" => "Datos incompletos"]));
+            return $res->withHeader('Content-Type', 'application/json')->withStatus(400);
+        }
+// conexion a la base de datos y busqueda de la factura
+        $db = conexion();
+        $factura = $db->GetRow("SELECT * FROM facturas WHERE nise=? AND periodo=?", [$nise, $periodo]);
+        if (!$factura) {
+            $res->getBody()->write(json_encode(["error" => "No se encontró factura para ese mes."]));
+            return $res->withHeader('Content-Type', 'application/json');
+        }
+// si se encuentra la factura, se busca la informacion del cliente
+        $cliente = $db->GetRow("SELECT c.*, p.nombre AS provincia FROM clientes c 
+        JOIN provincias p ON c.provincia_id=p.id WHERE nise=?", [$nise]);
+        $resultado = [
+            "cliente" => $cliente,
+            "factura" => $factura
+        ];
+        $res->getBody()->write(json_encode($resultado));
+        return $res->withHeader('Content-Type', 'application/json');
+    });
+
+    // --------------------fin formulario de facturas ------------------------//
 };
