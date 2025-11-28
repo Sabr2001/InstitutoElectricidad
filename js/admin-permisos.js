@@ -21,7 +21,7 @@ $("#crudProducto").validate({
 });
 
 $("#btnGuardar").click(function (e) {
-     if (!$("#crudProducto").valid()) 
+    if (!$("#crudProducto").valid()) 
         return;
     
     if (accion == 1) {
@@ -29,7 +29,7 @@ $("#btnGuardar").click(function (e) {
     } else {
         Modificar();
         accion = 1;
-        $("#modalProducto").modal('hide');
+        $("#modalPermiso").modal('hide');
     }
 
     //limpiar campos
@@ -159,7 +159,7 @@ function cargarDatos(res) {
                 <td>${p.descripcion}</td>
                 <td>${p.habilitado == 1 ? "Si" : "No"}</td>
                 <td>
-                    <button data-bs-toggle="modal" data-bs-target="#modalProducto" class="btn-Editar btn btn-outline-warning" data-idPermiso="${p.id}">
+                    <button data-bs-toggle="modal" data-bs-target="#modalPermiso" class="btn-Editar btn btn-outline-warning" data-idPermiso="${p.id}">
                         <i class="fa-solid fa-pen-to-square"></i>
                     </button>
                     <button class="btn-Eliminar btn btn-outline-danger" data-idPermiso="${p.id}">

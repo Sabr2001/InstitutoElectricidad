@@ -10,7 +10,7 @@
         <div class="container-fluid">
             <!-- Botón para agregar nuevo registro -->
             <div class="d-flex justify-content-end mb-3">
-                <button id="btnNuevo" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalProducto">
+                <button id="btnNuevo" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalPermiso">
                     <i class="fa-solid fa-plus"></i>
                 </button>
             </div>
@@ -35,7 +35,7 @@
     </main>
 </div>
 <!-- Modal -->
-<div class="modal fade" id="modalProducto" tabindex="-1" aria-labelledby="crudModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalPermiso" tabindex="-1" aria-labelledby="crudModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">

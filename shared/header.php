@@ -1,9 +1,9 @@
 <?php
 $archivo = basename($_SERVER['PHP_SELF']);
 $nombreArchivo = explode(".", $archivo)[0];
-var_dump($nombreArchivo);
-    require_once "shared/auth.php";
-    $pass = autenticado();
+// var_dump($nombreArchivo);
+require_once "shared/auth.php";
+$pass = autenticado();
 ?>
 
 <!DOCTYPE html>
@@ -41,9 +41,6 @@ var_dump($nombreArchivo);
                             <a class="nav-link <?php if ($nombreArchivo == "galeria") echo 'active' ?>" href="galeria.php">Galería</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link <?php if ($nombreArchivo == "Formulario") echo 'active' ?>" href="contacto.php">Formulario</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link <?php if ($nombreArchivo == "FAQ") echo 'active' ?>" href="FAQ.php">Preguntas Frecuentes</a>
                         </li>
                         <li class="nav-item">
@@ -65,6 +62,10 @@ var_dump($nombreArchivo);
                 
                 <?php if ($pass): ?>
                     <a href="logout.php" class="btn btn-danger btn-l">Cerrar sesión</a>
+                <?php else:?>
+                    <a href="contacto.php" class="btn backPrimaryLight btn-l me-2">Unirte</a>
+                    <a href="dashboard.php" class="btn btn-danger btn-l">Ingresar</a>
+
                 <?php endif; ?>
             </div>
 

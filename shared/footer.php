@@ -49,7 +49,12 @@ switch ($nombreArchivo) {
         echo "<script src='js/$nombreArchivo.js'></script>";
         echo '<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>';
         break;
-
+    case 'dashboard';
+        echo  "<script src='js/$nombreArchivo.js'></script>";
+        break;
+    case 'contacto_cliente';
+        echo  "<script src='js/$nombreArchivo.js'></script>";
+        break;
     default:
         # code...
         break;

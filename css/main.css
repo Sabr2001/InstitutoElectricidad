@@ -5,6 +5,7 @@
 :root{
     --icebackgorund: #2e2d2b;
     --primario: #003366;       /* Azul institucional ICE */
+    --primaryLight: #598ec4;       /* Azul institucional ICE */
     --secundario: #F2F2F2;     /* Gris claro más cálido */
     --enfasis: #FFB400;        /* Amarillo ICE (más suave que naranja puro) */
     --neutro1: #FFFFFF;        /* Blanco */
@@ -51,6 +52,9 @@ section{
 .bgColorPrimario{
     background-color: var(--primario) !important;
 }
+.backPrimaryLight{
+    background-color: var(--primaryLight) !important;
+}
 .bgColorSecundario{
     background-color: var(--secundario) !important;
 }
@@ -68,6 +72,10 @@ section{
 }
 .textColorNeutro1{
     color: var(--neutro1) !important;
+}
+.colorPrimaryLight{
+    color: var(--primaryLight) !important;
+
 }
 
 /* Botones y enlaces */
