@@ -18,9 +18,11 @@ loginRequerido()
                 </div>
                 <!-- INICIO SECCION CONSULTA NISE -->
                 <div class="card text-center">
-                    <h3 class="mb-3 text-center">Consulta de Facturación</h3>
+                    <div class="card-header">
+                       <h3>Consulta Lecturas</h3>
+                    </div>
                     <div class="card-body ">
-                        <h5 class="card-title">Consulta NISE</h5>
+                        <h5 class="card-title">Ingresar NISE</h5>
                         <form id="buscarNise" class="d-flex" role="search">
                             <input class="form-control me-2" name="nise" id="nise" type="search" placeholder="-- Ej: 0000000 --" aria-label="Buscar" />
                             <button class="btn btn-outline-success me-2" type="submit" data-tipo="read">Buscar</button>
