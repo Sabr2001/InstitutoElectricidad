@@ -16,11 +16,9 @@ loginRequerido()
                 <div class="m-4">
                     <h1>Bienvenidos a Agencia Virtual</h1>
                 </div>
+                <!-- INICIO SECCION CONSULTA NISE -->
                 <div class="card text-center">
-                    <div class="card-header">
-                        Buscador
-                    </div>
-                    <!-- INICIO SECCION CONSULTA NISE -->
+                    <h3 class="mb-3 text-center">Consulta de Facturación</h3>
                     <div class="card-body ">
                         <h5 class="card-title">Consulta NISE</h5>
                         <form id="buscarNise" class="d-flex" role="search">
@@ -31,8 +29,8 @@ loginRequerido()
                             <?php endif;?>
                         </form>
                     </div>
-                    <!-- FIN SECCION CONSULTA NISE -->
                 </div>
+                <!-- FIN SECCION CONSULTA NISE -->
                 <!-- Inicio Formulario para consultar la facturacion de los clientes -->
                 <div class="container mt-4">
                     <h3 class="mb-3 text-center">Consulta de Facturación</h3>
