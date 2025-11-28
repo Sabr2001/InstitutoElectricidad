@@ -26,7 +26,9 @@ loginRequerido()
                         <form id="buscarNise" class="d-flex" role="search">
                             <input class="form-control me-2" name="nise" id="nise" type="search" placeholder="-- Ej: 0000000 --" aria-label="Buscar" />
                             <button class="btn btn-outline-success me-2" type="submit" data-tipo="read">Buscar</button>
-                            <button class="btn btn-outline-success" type="submit" id="btn-add-nise" data-tipo="add">Generar<i class="fa-solid fa-bolt"></i></button>
+                            <?php if ($_SESSION["correo"] == 'admin@ice.go.cr'): ?>
+                                <button class="btn btn-outline-success" type="submit" id="btn-add-nise" data-tipo="add">Generar<i class="fa-solid fa-bolt"></i></button>
+                            <?php endif;?>
                         </form>
                     </div>
                     <!-- FIN SECCION CONSULTA NISE -->
