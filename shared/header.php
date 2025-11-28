@@ -19,7 +19,7 @@ $pass = autenticado();
     <link rel="stylesheet" href="css/<?php echo $nombreArchivo ?>.css">
 </head>
 
-<body class="container-fluid p-0">
+<body class="d-flex flex-column min-vh-100">
     <!-- Cabecera de la página -->
     <header>
         <!-- Menu principal -->

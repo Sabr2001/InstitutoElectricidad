@@ -1,5 +1,5 @@
 <!-- Pie de la página -->
-<footer class="row text-center bgIceBackground pt-3 pb-3">
+<footer class="row text-center bgIceBackground mt-auto pt-3">
     <div class="col-md-6 col-lg-3">
         <h3>Instituto Costarricense de Electricidad</h3>
         <a href="#">Historia</a>
