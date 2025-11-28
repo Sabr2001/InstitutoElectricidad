@@ -36,16 +36,17 @@ loginRequerido()
                 <!-- Inicio Formulario para consultar la facturacion de los clientes -->
                 <div class="container mt-4">
                     <h3 class="mb-3 text-center">Consulta de Facturación</h3>
-                    <!-- si es admin deja escribir el nise a revisar la facturacion -->
+                    
+                    <!-- Selector de periodo -->
+                    <div class="card p-3 mb-4">
+                        <!-- si es admin deja escribir el nise a revisar la facturacion -->
                     <?php if (isset($_SESSION["correo"]) && $_SESSION["correo"] === 'admin@ice.go.cr'): ?>
                         <div class="mb-3">
                             <label><strong>Consultar facturación por NISE:</strong></label>
                             <input type="number" id="adminNise" class="form-control w-25" placeholder="Ingrese NISE del cliente">
                         </div>
                     <?php endif; ?>
-                    <!-- Selector de periodo -->
-                    <div class="card p-3 mb-4">
-                        <label><strong>Seleccione el periodo a consultar:</strong></label>
+                    <label><strong>Seleccione el periodo a consultar:</strong></label>
                         <input type="month" id="periodo" class="form-control w-25">
                         <button id="btnBuscar" class="btn btn-primary mt-3 w-25">Buscar</button>
                     </div>
