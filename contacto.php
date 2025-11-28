@@ -10,14 +10,13 @@
             <form action="send_mail.php" method="POST">
 
                 <label for="cedula" class="form-label fw-bold">Cédula del Cliente</label>
-                <input 
-                    type="text" 
-                    id="cedula" 
-                    name="cedula" 
-                    class="form-control mb-3" 
-                    placeholder="Ingrese su cédula" 
-                    required
-                >
+                <input
+                    type="text"
+                    id="cedula"
+                    name="cedula"
+                    class="form-control mb-3"
+                    placeholder="Ingrese su cédula"
+                    required>
 
                 <button type="submit" class="btn bgColorPrimario textColorNeutro1 w-100">
                     Enviar Solicitud
@@ -25,6 +24,7 @@
 
             </form>
         </div>
+        
     </section>
 </main>
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-11-2025 a las 22:44:50
+-- Tiempo de generación: 27-11-2025 a las 11:39:30
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 7.4.27
 
@@ -47,7 +47,7 @@ CREATE TABLE `clientes` (
 --
 
 INSERT INTO `clientes` (`nise`, `cedula`, `nombre`, `apellido1`, `apellido2`, `telefono`, `email`, `direccion`, `provincia_id`, `tipo_tarifa`, `activo`, `fecha_registro`) VALUES
-(1, '207480882', 'Luis Carlos', 'Zamora', 'Zamora Gonzalez', '60183051', 'luis.zamora012@gmail.com', 'Upala', 2, 'HOGAR', 1, '2025-11-26 13:51:37');
+(1, '208750999', 'Carlos', 'Mora', 'Jiménez', '8888-5566', 'carlos.mora@correo.com', 'Residencial Las Flores, Casa #23', 3, 'HOGAR', 1, '2025-11-27 03:23:06');
 
 -- --------------------------------------------------------
 
@@ -71,6 +71,17 @@ CREATE TABLE `contacto` (
   `fecha_respuesta` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `contacto`
+--
+
+INSERT INTO `contacto` (`id`, `nise`, `periodo_consultado`, `tipo`, `asunto`, `descripcion`, `correo_remitente`, `telefono_contacto`, `fecha_envio`, `estado`, `usuario_encargado_correo`, `respuesta`, `fecha_respuesta`) VALUES
+(1, 1, '2025-01-01', 'RECLAMO', 'Facturación incorrecta', 'Creo que el consumo registrado no es correcto, solicito verificación.', 'carlos.mora@correo.com', '8888-5566', '2025-11-27 03:26:04', 'RECIBIDA', NULL, NULL, NULL),
+(9, 1, '2025-01-01', 'RECLAMO', 'Muy alto el recibo', 'prueba', 'carlos.mora@correo.com', NULL, '2025-11-27 04:00:23', 'RECIBIDA', NULL, NULL, NULL),
+(10, 1, '2025-04-01', 'CONSULTA', 'Probando', 'solo estoy probando el sistema', 'carlos.mora@correo.com', NULL, '2025-11-27 04:02:14', 'RECIBIDA', NULL, NULL, NULL),
+(11, 1, '2025-08-01', 'RECLAMO', 'Hola Brodis', 'como estan brodis', 'carlos.mora@correo.com', NULL, '2025-11-27 04:24:54', 'RECIBIDA', NULL, NULL, NULL),
+(12, 1, '2025-12-01', 'QUEJA', 'Debi tirar mas codigo', 'Debi tirar mas codigo cuando te tuve debi usar mas github las veces que pude\n', 'carlos.mora@correo.com', NULL, '2025-11-27 04:36:23', 'RECIBIDA', NULL, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -93,6 +104,13 @@ CREATE TABLE `facturas` (
   `estado` enum('PENDIENTE','PAGADA','VENCIDA') COLLATE utf8_spanish_ci NOT NULL DEFAULT 'PENDIENTE'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `facturas`
+--
+
+INSERT INTO `facturas` (`consecutivo`, `periodo`, `nise`, `lectura_id`, `fecha_emision`, `fecha_vencimiento`, `consumo_kWh_facturado`, `costo_kWh_aplicado`, `tarifa_id`, `subtotal`, `impuestos`, `total_pagar`, `estado`) VALUES
+(1, '2025-01-01', 1, 1, '2025-11-27 03:25:32', '2025-12-12', '125.00', '150.5000', 1, '18812.50', '0.00', '18812.50', 'PENDIENTE');
+
 -- --------------------------------------------------------
 
 --
@@ -109,6 +127,13 @@ CREATE TABLE `lecturas` (
   `tarifa_id` int(11) NOT NULL,
   `observaciones` varchar(200) COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `lecturas`
+--
+
+INSERT INTO `lecturas` (`id`, `periodo`, `nise`, `consumo_kWh`, `fecha_lectura`, `fecha_corte`, `tarifa_id`, `observaciones`) VALUES
+(1, '2025-01-01', 1, '125.00', '2025-11-27 03:25:08', NULL, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -280,7 +305,8 @@ CREATE TABLE `usuarios_ice` (
 --
 
 INSERT INTO `usuarios_ice` (`correo`, `nickname`, `password`, `cedula`, `nombre_completo`, `fecha_creacion`, `activo`) VALUES
-('admin@ice.go.cr', 'admin_ice', '12345678', NULL, 'Administrador Sistema', '2025-11-23 04:11:22', 1);
+('admin@ice.go.cr', 'admin_ice', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, 'Administrador Sistema', '2025-11-27 08:54:47', 1),
+('carlos.mora@correo.com', 'cmora', '$2y$10$YbZi4nOt9juIvWBbgCcyueXlQ0gdxLkvtBO36pWYn6mf1U.WX9GQy', '208750999', 'Carlos Mora Jiménez', '2025-11-27 03:23:32', 1);
 
 -- --------------------------------------------------------
 
@@ -298,7 +324,8 @@ CREATE TABLE `usuarios_roles` (
 --
 
 INSERT INTO `usuarios_roles` (`correo`, `rol_id`) VALUES
-('admin@ice.go.cr', 1);
+('admin@ice.go.cr', 1),
+('carlos.mora@correo.com', 3);
 
 --
 -- Índices para tablas volcadas
@@ -413,19 +440,19 @@ ALTER TABLE `clientes`
 -- AUTO_INCREMENT de la tabla `contacto`
 --
 ALTER TABLE `contacto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `facturas`
 --
 ALTER TABLE `facturas`
-  MODIFY `consecutivo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `consecutivo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `lecturas`
 --
 ALTER TABLE `lecturas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `permisos`

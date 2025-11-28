@@ -1,21 +1,19 @@
-<?php 
-    include "shared/auth.php";
-    include "shared/header.php";
+<?php
+include "shared/auth.php";
+include "shared/header.php";
 
-    loginRequerido()
+loginRequerido()
 
 ?>
 <main class="flex-grow-1">
     <div class="row">
         <?php include "shared/aside.php"; ?>
-            <section class="col">
-                <div class="container">
-                    <div class="m-4">
-                        <h1>Bienvenidos a Agencia Virtual</h1>
-                    </div>
-
-
-                    <div class="card text-center">
+        <section class="col">
+            <div class="container">
+                <div class="m-4">
+                    <h1>Bienvenidos a Agencia Virtual</h1>
+                </div>
+                <div class="card text-center">
                     <div class="card-header">
                         Buscador
                     </div>
@@ -122,3 +120,8 @@
     </div>
 </div>
 <?php include "shared/footer.php"; ?>
+<!-- Pasar el correo del usuario a JavaScript -->
+<script>
+    const usuarioCorreo = "<?= $_SESSION['correo'] ?>";
+</script>
+<script src="js/consulta_factura.js"></script>
