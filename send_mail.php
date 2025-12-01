@@ -1,19 +1,26 @@
 <?php
-
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// cargar PHPMailer desde Composer
+include "shared/header.php";
+
+// cargar PHPMailer
 require __DIR__ . '/ApiINSTITUTOELECTRICIDAD/vendor/autoload.php';
 
 // ============================
 // VALIDAR CLIENTE EN LA BD
 // ============================
 
+$mensaje = "";   // mensaje a mostrar
+$tipo = "";      // success | danger
+
 $cedula = $_POST['cedula'] ?? '';
 
 if (!$cedula) {
-    echo "Debe ingresar una cédula.";
+    $mensaje = "Debe ingresar una cédula.";
+    $tipo = "danger";
+    include "shared/footer.php";
+    mostrarVista($mensaje, $tipo);
     exit;
 }
 
@@ -21,15 +28,20 @@ if (!$cedula) {
 $conexion = new mysqli("localhost", "root", "", "institutoelectricidad");
 
 if ($conexion->connect_error) {
-    die("Error conectando a la base de datos: " . $conexion->connect_error);
+    $mensaje = "Error conectando a la base de datos.";
+    $tipo = "danger";
+    mostrarVista($mensaje, $tipo);
+    exit;
 }
 
-// Consulta con diagnóstico
 $sql = "SELECT * FROM clientes WHERE cedula = ?";
 $stmt = $conexion->prepare($sql);
 
 if (!$stmt) {
-    die("Error en prepare(): " . $conexion->error . "<br>SQL: $sql");
+    $mensaje = "Error interno del servidor.";
+    $tipo = "danger";
+    mostrarVista($mensaje, $tipo);
+    exit;
 }
 
 $stmt->bind_param("s", $cedula);
@@ -37,7 +49,9 @@ $stmt->execute();
 $resultado = $stmt->get_result();
 
 if ($resultado->num_rows == 0) {
-    echo "La cédula ingresada no está registrada como cliente.";
+    $mensaje = "La cédula ingresada no está registrada como cliente, si sigue teniendo problemas dejenos saberlo en soporte al cliente.";
+    $tipo = "danger";
+    mostrarVista($mensaje, $tipo);
     exit;
 }
 
@@ -49,7 +63,6 @@ $correoCliente = $cliente['email'] ?? "No registrado";
 // ============================
 
 try {
-
     $mail = new PHPMailer(true);
     $mail->isSMTP();
     $mail->Host = "smtp.gmail.com";
@@ -67,16 +80,44 @@ try {
     $mail->isHTML(true);
     $mail->Subject = "Solicitud de registro de usuario";
     $mail->Body = "
-        Un cliente ha solicitado la creación de usuario.<br><br>
+        Un cliente ha solicitado la creación de usuario, por favor crearle el usuario y contrasena de su agencia virtual.<br><br>
         <b>Cédula:</b> $cedula <br>
         <b>Correo registrado en BD:</b> $correoCliente
     ";
 
     $mail->send();
 
-    echo "Solicitud enviada correctamente.";
+    $mensaje = "Solicitud enviada correctamente, una vez creadas sus credenciales se le hara llegar via correo electronico.";
+    $tipo = "success";
 
 } catch (Exception $e) {
-    echo "Error enviando correo: " . $mail->ErrorInfo;
+    $mensaje = "Error enviando correo: " . $mail->ErrorInfo;
+    $tipo = "danger";
+}
+
+// Mostrar vista final
+mostrarVista($mensaje, $tipo);
+
+
+// ============================
+// FUNCIÓN PARA MOSTRAR VISTA
+// ============================
+
+function mostrarVista($mensaje, $tipo)
+{
+    echo "
+    <main class='row justify-content-center mt-5'>
+        <div class='col-sm-10 col-md-6 col-lg-4'>
+            <div class='alert alert-$tipo text-center shadow-sm p-3'>
+                <strong>" . ($tipo == "danger" ? "Error:" : "Éxito:") . "</strong> 
+                $mensaje
+            </div>
+
+            <a href='contacto.php' class='btn btn-primary w-100 mt-3'>Volver</a>
+        </div>
+    </main>
+    ";
+
+    include "shared/footer.php";
 }
 ?>
