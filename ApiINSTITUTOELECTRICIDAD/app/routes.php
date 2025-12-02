@@ -11,11 +11,20 @@ use Slim\Interfaces\RouteCollectorProxyInterface as Group;
 
 include "../public/conexion.php";
 
+$app->addBodyParsingMiddleware();
+$app->add(function ($req, $handler) {
+    $response = $handler->handle($req);
+    return $response
+        ->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
+
 return function (App $app) {
     $app->options('/{routes:.*}', function (Request $request, Response $response) {
         return $response;
     });
-
 
     //Metodo para validar conexion 
     $app->get('/', function (Request $request, Response $response) {
@@ -116,7 +125,7 @@ return function (App $app) {
     });
     //---------------------- Fin CRUD PERMISOS ---------------------//
 
-    //-----------------------CRUD USUARIOS---------------------------//
+   //-----------------------CRUD USUARIOS---------------------------//
     $app->post('/guardarUsuario', function (Request $request, Response $response) {
         $fila = $request->getQueryParams();
         $db = conexion();
@@ -167,8 +176,6 @@ return function (App $app) {
         return $response;
     });
     //---------------------Fin CRUD USUARIOS-------------------------//
-
-
     //---------------- AGRUPACIONES --------------------------------//
     $app->get('/permisosPorEstado', function (Request $request, Response $response) {
         $sql = "SELECT habilitado, COUNT(*) AS total FROM permisos GROUP BY habilitado";
@@ -256,26 +263,26 @@ return function (App $app) {
     //---------------------Fin Login -------------------------------//
 
     //---------------------Inicio Lecturas-------------------------//
-        $app->post('/guardarLectura/{nise}', function (Request $request, Response $response, $args) {
-            $fila = $request->getQueryParams();
-            $nise = $args['nise'];
-            $fila['nise'] = $nise;
-            $db = conexion();
-            $res = $db->AutoExecute("lecturas", $fila, "INSERT");
-            $db->Close();
-            $response->getBody()->write(strval($res));
-            return $response;
-        });
+    $app->post('/guardarLectura/{nise}', function (Request $request, Response $response, $args) {
+        $fila = $request->getQueryParams();
+        $nise = $args['nise'];
+        $fila['nise'] = $nise;
+        $db = conexion();
+        $res = $db->AutoExecute("lecturas", $fila, "INSERT");
+        $db->Close();
+        $response->getBody()->write(strval($res));
+        return $response;
+    });
 
-        $app->put('/editLectura/{id}', function (Request $request, Response $response,  $args) {
-            $fila = $request->getQueryParams();
-            $id = $args['id'];
-            $db = conexion();
-            $res = $db->AutoExecute("lecturas", $fila, "UPDATE", "id=$id");
-            $db->Close();
-            $response->getBody()->write(strval($res));
-            return $response;
-        });
+    $app->put('/editLectura/{id}', function (Request $request, Response $response,  $args) {
+        $fila = $request->getQueryParams();
+        $id = $args['id'];
+        $db = conexion();
+        $res = $db->AutoExecute("lecturas", $fila, "UPDATE", "id=$id");
+        $db->Close();
+        $response->getBody()->write(strval($res));
+        return $response;
+    });
 
     $app->delete('/borrarLectura', function (Request $request, Response $response) {
         $response->getBody()->write('Borrando....');
@@ -346,6 +353,8 @@ return function (App $app) {
         return $res->withHeader('Content-Type', 'application/json');
     });
     // Recibe el NISE y el periodo, busca la factura y devuelve la informacion del cliente y la factura
+
+    // Recibe el NISE y el periodo, busca la factura y devuelve la informacion del cliente y la factura
     $app->get('/getFactura', function ($req, $res) {
         $nise = $_GET["nise"] ?? null;
         $periodo = $_GET["periodo"] ?? null;
@@ -359,39 +368,24 @@ return function (App $app) {
         if (!$factura) {
             $res->getBody()->write(json_encode(["error" => "No se encontró factura para ese mes."]));
             return $res->withHeader('Content-Type', 'application/json');
-        });
-        // Recibe el NISE y el periodo, busca la factura y devuelve la informacion del cliente y la factura
-        $app->get('/getFactura', function ($req, $res) {
-            $nise = $_GET["nise"] ?? null;
-            $periodo = $_GET["periodo"] ?? null;
-            if (!$nise || !$periodo) {
-                $res->getBody()->write(json_encode(["error" => "Datos incompletos"]));
-                return $res->withHeader('Content-Type', 'application/json')->withStatus(400);
-            }
-            // conexion a la base de datos y busqueda de la factura
-            $db = conexion();
-            $factura = $db->GetRow("SELECT * FROM facturas WHERE nise=? AND periodo=?", [$nise, $periodo]);
-            if (!$factura) {
-                $res->getBody()->write(json_encode(["error" => "No se encontró factura para ese mes."]));
-                return $res->withHeader('Content-Type', 'application/json');
-            }
-            // si se encuentra la factura, se busca la informacion del cliente
-            $cliente = $db->GetRow("SELECT c.*, p.nombre AS provincia FROM clientes c 
+        }
+        // si se encuentra la factura, se busca la informacion del cliente
+        $cliente = $db->GetRow("SELECT c.*, p.nombre AS provincia FROM clientes c 
                 JOIN provincias p ON c.provincia_id=p.id WHERE nise=?", [$nise]);
-            $resultado = [
-                "cliente" => $cliente,
-                "factura" => $factura
-            ];
-            $res->getBody()->write(json_encode($resultado));
-            return $res->withHeader('Content-Type', 'application/json');
-        });
+        $resultado = [
+            "cliente" => $cliente,
+            "factura" => $factura
+        ];
+        $res->getBody()->write(json_encode($resultado));
+        return $res->withHeader('Content-Type', 'application/json');
+    });
 
     // --------------------fin formulario de facturas ------------------------//
 
 
     // --------------------Modulo de consulta para graficos -------------------//
-        $app->get('/consumoMes', function (Request $request, Response $response) {
-            $sql = "SELECT 
+    $app->get('/consumoMes', function (Request $request, Response $response) {
+        $sql = "SELECT 
                     p.nombre AS provincia,
                     SUM(l.consumo_kWh) AS total_consumo
                 FROM lecturas l
@@ -400,17 +394,17 @@ return function (App $app) {
                 GROUP BY p.id, p.nombre
                 ORDER BY p.nombre";
 
-            $db = conexion();
-            $db->SetFetchMode(ADODB_FETCH_ASSOC);
-            $res = $db->GetAll($sql);
-            $db->Close();
+        $db = conexion();
+        $db->SetFetchMode(ADODB_FETCH_ASSOC);
+        $res = $db->GetAll($sql);
+        $db->Close();
 
-            $response->getBody()->write(json_encode($res));
-            return $response;
-        });
+        $response->getBody()->write(json_encode($res));
+        return $response;
+    });
 
-        $app->get('/consumoTrimestre', function (Request $request, Response $response) {
-            $sql = "SELECT 
+    $app->get('/consumoTrimestre', function (Request $request, Response $response) {
+        $sql = "SELECT 
                     p.nombre AS provincia,
                     SUM(l.consumo_kWh) AS total_consumo
                 FROM lecturas l
@@ -419,17 +413,17 @@ return function (App $app) {
                 GROUP BY p.id, p.nombre
                 ORDER BY p.nombre";
 
-            $db = conexion();
-            $db->SetFetchMode(ADODB_FETCH_ASSOC);
-            $res = $db->GetAll($sql);
-            $db->Close();
+        $db = conexion();
+        $db->SetFetchMode(ADODB_FETCH_ASSOC);
+        $res = $db->GetAll($sql);
+        $db->Close();
 
-            $response->getBody()->write(json_encode($res));
-            return $response;
-        });
+        $response->getBody()->write(json_encode($res));
+        return $response;
+    });
 
-        $app->get('/consumoSemestre', function (Request $request, Response $response) {
-            $sql = "SELECT 
+    $app->get('/consumoSemestre', function (Request $request, Response $response) {
+        $sql = "SELECT 
                     p.nombre AS provincia,
                     SUM(l.consumo_kWh) AS total_consumo
                 FROM lecturas l
@@ -438,17 +432,17 @@ return function (App $app) {
                 GROUP BY p.id, p.nombre
                 ORDER BY p.nombre";
 
-            $db = conexion();
-            $db->SetFetchMode(ADODB_FETCH_ASSOC);
-            $res = $db->GetAll($sql);
-            $db->Close();
+        $db = conexion();
+        $db->SetFetchMode(ADODB_FETCH_ASSOC);
+        $res = $db->GetAll($sql);
+        $db->Close();
 
-            $response->getBody()->write(json_encode($res));
-            return $response;
-        });
+        $response->getBody()->write(json_encode($res));
+        return $response;
+    });
 
-        $app->get('/consumoAnual', function (Request $request, Response $response) {
-            $sql = "SELECT 
+    $app->get('/consumoAnual', function (Request $request, Response $response) {
+        $sql = "SELECT 
                     p.nombre AS provincia,
                     SUM(l.consumo_kWh) AS total_consumo
                 FROM lecturas l
@@ -457,17 +451,69 @@ return function (App $app) {
                 GROUP BY p.id, p.nombre
                 ORDER BY p.nombre";
 
-            $db = conexion();
-            $db->SetFetchMode(ADODB_FETCH_ASSOC);
-            $res = $db->GetAll($sql);
-            $db->Close();
+        $db = conexion();
+        $db->SetFetchMode(ADODB_FETCH_ASSOC);
+        $res = $db->GetAll($sql);
+        $db->Close();
 
-            $response->getBody()->write(json_encode($res));
-            return $response;
-        });
-
-
-
+        $response->getBody()->write(json_encode($res));
+        return $response;
+    });
     // --------------------fin de consulta para graficos consumo  ------------------------//
 
+    // --------------------CRUD para clientes -------------------//
+    $app->get('/getClientes', function ($request, $response) {
+        $db = conexion();
+        $sql = "SELECT c.*, p.nombre as provincia 
+            FROM clientes c 
+            JOIN provincias p ON c.provincia_id=p.id";
+        $rows = $db->GetAll($sql);
+        $db->Close();
+        $response->getBody()->write(json_encode($rows));
+        return $response->withHeader('Content-Type', 'application/json');
+    });
+
+    $app->get('/getCliente/{nise}', function ($request, $response, $args) {
+        $nise = $args['nise'];
+        $db = conexion();
+        $db->SetFetchMode(ADODB_FETCH_ASSOC);
+        $sql = "SELECT c.*, p.nombre as provincia 
+            FROM clientes c
+            JOIN provincias p ON c.provincia_id = p.id
+            WHERE c.nise = ?";
+        $row = $db->GetRow($sql, [$nise]);
+        $db->Close();
+        $response->getBody()->write(json_encode($row));
+        return $response->withHeader('Content-Type', 'application/json');
+    });
+
+    $app->post('/addCliente', function ($request, $response) {
+        $data = $request->getParsedBody();
+        $db = conexion();
+        $result = $db->AutoExecute("clientes", $data, "INSERT");
+        $db->Close();
+        $response->getBody()->write(json_encode(["success" => $result]));
+        return $response->withHeader('Content-Type', 'application/json');
+    });
+
+    $app->put('/editarCliente/{id}', function ($request, $response, $args) {
+        $data = $request->getParsedBody();
+        $id = $args['id'];
+        $db = conexion();
+        $result = $db->AutoExecute("clientes", $data, "UPDATE", "nise=$id");
+        $db->Close();
+        $response->getBody()->write(json_encode(["success" => $result]));
+        return $response->withHeader('Content-Type', 'application/json');
+    });
+
+    $app->delete('/eliminarCliente/{id}', function ($request, $response, $args) {
+        $id = $args['id'];
+        $db = conexion();
+        $result = $db->Execute("DELETE FROM clientes WHERE nise=?", [$id]);
+        $db->Close();
+        $response->getBody()->write(json_encode(["success" => $result]));
+        return $response->withHeader('Content-Type', 'application/json');
+    });
+
+    // --------------------fin CRUD para clientes ------------------------//
 };

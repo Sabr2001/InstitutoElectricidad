@@ -6,7 +6,12 @@
     <div class="d-flex flex-column flex-shrink-0 sidebar-ice" style="width: 4.5rem;">
         <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
             <li>
-                <a href="clientes.php" class="nav-link py-3 border-bottom rounded-0" title="usuarios" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Dashboard" data-bs-original-title="Dashboard">
+                <a href="admin-clientes.php" class="nav-link py-3 border-bottom rounded-0" title="clientes" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Dashboard" data-bs-original-title="Dashboard">
+                    <i class="fa-solid fa-users"></i>
+                </a>
+            </li>
+            <li>
+                <a href="admin-usuarios.php" class="nav-link py-3 border-bottom rounded-0" title="usuarios" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Dashboard" data-bs-original-title="Dashboard">
                     <i class="fa-solid fa-users"></i>
                 </a>
             </li>

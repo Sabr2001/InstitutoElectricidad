@@ -37,6 +37,7 @@ $container = $containerBuilder->build();
 // Instantiate the app
 AppFactory::setContainer($container);
 $app = AppFactory::create();
+$app->addErrorMiddleware(true, true, true);
 $callableResolver = $app->getCallableResolver();
 
 // Register middleware
