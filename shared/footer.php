@@ -40,14 +40,14 @@ switch ($nombreArchivo) {
 
     case 'contactenos':
         echo "<script src='https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js'></script>";
-         break;
+        break;
 
     case 'admin-permisos':
         echo "<script src='js/$nombreArchivo.js'></script>";
         break;
-    case 'graficos':
-        echo "<script src='js/$nombreArchivo.js'></script>";
+    case 'estadisticas_consumo':
         echo '<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>';
+        echo "<script src='js/$nombreArchivo.js'></script>";
         break;
     case 'dashboard';
         echo  "<script src='js/$nombreArchivo.js'></script>";
@@ -61,4 +61,5 @@ switch ($nombreArchivo) {
 }
 ?>
 </body>
+
 </html>

@@ -60,13 +60,16 @@ $pass = autenticado();
                                 </a>
                             <?php endif; ?>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link <?php if ($nombreArchivo == "Reportes") echo 'active' ?>" href="estadisticas_consumo.php">Reportes</a>
+                        </li>
 
                     </ul>
                 </div>
 
                 <?php if ($pass): ?>
                     <a href="logout.php" class="btn btn-danger btn-l">Cerrar sesión</a>
-                <?php else:?>
+                <?php else: ?>
                     <a href="contacto.php" class="btn backPrimaryLight btn-l me-2">Unirte</a>
                     <a href="dashboard.php" class="btn btn-danger btn-l">Ingresar</a>
 

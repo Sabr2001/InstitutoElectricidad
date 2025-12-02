@@ -1,0 +1,17 @@
+@import url(main.css);
+
+/* Contenedor de los gráficos */
+.card-grafico {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+    margin-bottom: 40px;
+    overflow-x: auto; 
+}
+
+/* CANVAS con ancho fijo para 7 barras */
+canvas {
+    height: 380px !important;
+    width: 900px !important; 
+}
