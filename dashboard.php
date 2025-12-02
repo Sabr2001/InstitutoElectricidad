@@ -154,37 +154,65 @@ loginRequerido()
 </div>
 
 <!-- Modal EDIT LECTURA -->
-<div class="modal fade" id=" <?php ($_SESSION["correo"] == 'admin@ice.go.cr'? 'modalEditLectura':'')?>"
-    tabindex="-1" aria-labelledby="crudModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalEditLectura" tabindex="-1" aria-labelledby="crudModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <!-- <h5 class="modal-title" id="crudModalLabel">Nuevo Permiso</h5> -->
-                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                <h5 class="modal-title" id="modalEditLecturaLabel">
+                    Editar Lectura <i class="fa-solid fa-bolt"></i>
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
             </div>
+
             <div class="modal-body">
-                <form id="crudLectura">
+                <form id="crudEditLectura">
                     <input type="hidden" id="id" name="id" value="">
+
                     <div class="mb-3">
-                        <label for="nombrePermiso" class="form-label">Nombre Permiso</label>
-                        <input name="nombrePermiso" type="text" class="form-control" id="nombrePermiso" placeholder="Ingrese Nombre del Permiso">
+                        <label for="niseEditLectura" class="form-label">NISE</label>
+                        <input type="text" class="form-control" id="niseEditLectura" name="niseEditLectura" readonly>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="periodo" class="form-label">Periodo</label>
+                        <input type="date" class="form-control" id="periodo" name="periodo" required>
                     </div>
                     <div class="mb-3">
-                        <label for="descripcion" class="form-label">Descripción</label>
-                        <input name="descripcion" type="text" class="form-control" id="descripcion" placeholder="Ingrese descripción">
+                        <label for="consumo_kWh" class="form-label">Consumo (kWh)</label>
+                        <input type="number" class="form-control" id="consumo_kWh" name="consumo_kWh" step="0.01" min="0" required>
                     </div>
                     <div class="mb-3">
-                        <label for="habilitado" class="form-label">Habilitado</label>
-                        <select name="habilitado" id="habilitado" class="form-select">
-                            <option value="1">Si</option>
-                            <option value="2">No</option>
+                        <label for="fecha_lectura" class="form-label">Fecha de lectura</label>
+                        <input type="date" class="form-control" id="fecha_lectura" name="fecha_lectura" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="fecha_corte" class="form-label">Fecha de corte</label>
+                        <input type="date" class="form-control" id="fecha_corte" name="fecha_corte">
+                    </div>
+                    <div class="mb-3">
+                        <label for="tarifa_id" class="form-label">Tarifa</label>
+                        <select class="form-select" id="tarifa_id" name="tarifa_id" required>
+                            <option value="">Seleccione una tarifa</option>
+                            <option value="1">Tarifa 1 - Residencial</option>
+                            <option value="2">Tarifa 2 - Comercial</option>
                         </select>
+                    </div>
+
+                    <!-- Observaciones -->
+                    <div class="mb-3">
+                        <label for="observaciones" class="form-label">Observaciones</label>
+                        <textarea class="form-control" id="observaciones" name="observaciones" rows="2" maxlength="100"></textarea>
                     </div>
                 </form>
             </div>
+
             <div class="modal-footer">
-                <button id="btnGuardarLectura" type="button" class="btn btn-primary">Guardar</button>
-                <button id="cancelar" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Cancelar
+                </button>
+                <button id="btnGuardarEditLectura" type="button" class="btn btn-primary">
+                    Guardar
+                </button>
             </div>
         </div>
     </div>

@@ -259,7 +259,7 @@ return function (App $app) {
         $app->post('/guardarLectura/{nise}', function (Request $request, Response $response, $args) {
             $fila = $request->getQueryParams();
             $nise = $args['nise'];
-            $fila['nise'] = $nise;  
+            $fila['nise'] = $nise;
             $db = conexion();
             $res = $db->AutoExecute("lecturas", $fila, "INSERT");
             $db->Close();
@@ -267,11 +267,14 @@ return function (App $app) {
             return $response;
         });
 
-        $app->put('/editLectura', function (Request $request, Response $response) {
+        $app->put('/editLectura/{id}', function (Request $request, Response $response,  $args) {
             $fila = $request->getQueryParams();
-            $id = $fila["id"];
+            $id = $args['id'];
             $db = conexion();
             $res = $db->AutoExecute("lecturas", $fila, "UPDATE", "id=$id");
+            $db->Close();
+            $response->getBody()->write(strval($res));
+            return $response;
         });
 
         $app->delete('/borrarLectura', function (Request $request, Response $response) {
@@ -359,7 +362,7 @@ return function (App $app) {
             }
             // si se encuentra la factura, se busca la informacion del cliente
             $cliente = $db->GetRow("SELECT c.*, p.nombre AS provincia FROM clientes c 
-            JOIN provincias p ON c.provincia_id=p.id WHERE nise=?", [$nise]);
+                JOIN provincias p ON c.provincia_id=p.id WHERE nise=?", [$nise]);
             $resultado = [
                 "cliente" => $cliente,
                 "factura" => $factura
@@ -369,5 +372,87 @@ return function (App $app) {
         });
 
     // --------------------fin formulario de facturas ------------------------//
+
+
+    // --------------------Modulo de consulta para graficos -------------------//
+        $app->get('/consumoMes', function (Request $request, Response $response) {
+            $sql = "SELECT 
+                    p.nombre AS provincia,
+                    SUM(l.consumo_kWh) AS total_consumo
+                FROM lecturas l
+                JOIN provincias p ON p.id = l.provincia_id
+                WHERE (l.fecha_lectura) >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)
+                GROUP BY p.id, p.nombre
+                ORDER BY p.nombre";
+
+            $db = conexion();
+            $db->SetFetchMode(ADODB_FETCH_ASSOC);
+            $res = $db->GetAll($sql);
+            $db->Close();
+
+            $response->getBody()->write(json_encode($res));
+            return $response;
+        });
+
+        $app->get('/consumoTrimestre', function (Request $request, Response $response) {
+            $sql = "SELECT 
+                    p.nombre AS provincia,
+                    SUM(l.consumo_kWh) AS total_consumo
+                FROM lecturas l
+                JOIN provincias p ON p.id = l.provincia_id
+                WHERE l.fecha_lectura >= DATE_SUB(CURDATE(), INTERVAL 3 MONTH)
+                GROUP BY p.id, p.nombre
+                ORDER BY p.nombre";
+
+            $db = conexion();
+            $db->SetFetchMode(ADODB_FETCH_ASSOC);
+            $res = $db->GetAll($sql);
+            $db->Close();
+
+            $response->getBody()->write(json_encode($res));
+            return $response;
+        });
+
+        $app->get('/consumoSemestre', function (Request $request, Response $response) {
+            $sql = "SELECT 
+                    p.nombre AS provincia,
+                    SUM(l.consumo_kWh) AS total_consumo
+                FROM lecturas l
+                JOIN provincias p ON p.id = l.provincia_id
+                WHERE l.fecha_lectura >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
+                GROUP BY p.id, p.nombre
+                ORDER BY p.nombre";
+
+            $db = conexion();
+            $db->SetFetchMode(ADODB_FETCH_ASSOC);
+            $res = $db->GetAll($sql);
+            $db->Close();
+
+            $response->getBody()->write(json_encode($res));
+            return $response;
+        });
+
+        $app->get('/consumoAnual', function (Request $request, Response $response) {
+            $sql = "SELECT 
+                    p.nombre AS provincia,
+                    SUM(l.consumo_kWh) AS total_consumo
+                FROM lecturas l
+                JOIN provincias p ON p.id = l.provincia_id
+                WHERE l.fecha_lectura >= DATE_SUB(CURDATE(), INTERVAL 12 MONTH)
+                GROUP BY p.id, p.nombre
+                ORDER BY p.nombre";
+
+            $db = conexion();
+            $db->SetFetchMode(ADODB_FETCH_ASSOC);
+            $res = $db->GetAll($sql);
+            $db->Close();
+
+            $response->getBody()->write(json_encode($res));
+            return $response;
+        });
+
+
+
+    // --------------------fin de consulta para graficos consumo  ------------------------//
 
 };

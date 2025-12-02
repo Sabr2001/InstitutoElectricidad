@@ -78,6 +78,68 @@ $('#btnGuardarAddLectura').on('click', function(){
     });
 })
 
+$('#btnGuardarEditLectura').on('click', function(){
+    console.log('ENTRE');
+    const id = $('#id').val().trim(); 
+    const PARAMS = $("#crudEditLectura").serialize();
+    const URL = `http://localhost:8080/editLectura/${id}?${PARAMS}`;
+
+    $.ajax({
+        type: "PUT",
+        url: URL,
+        beforeSend: function (params) {
+            $("#loaderOverlay").css("display", "block");
+        },
+        success: function (res) {
+            console.log(res);
+            alert("Datos Editados correctamente");
+            const modalElement = document.getElementById('modalEditLectura');
+            const modal = bootstrap.Modal.getInstance(modalElement);
+            modal.hide();
+        },
+        error: function (xhr) {
+            //Codigo a ejecutar peticion con errores
+        },
+        complete: function (params) {
+            $("#loaderOverlay").css("display", "none");
+        }
+    });
+})
+
+$(document).on('click', '.btn-edit-lectura', function (e) {
+    e.preventDefault();
+    const boton = $(this);
+    const id = $(boton).data('id');
+    const tr = boton.closest('tr');
+    if(!id){
+        alert('Denegado')
+        return;
+    }
+    editLectura(id ,tr)
+
+})
+
+function editLectura(id, tr){
+
+    const periodo       = tr.find('td').eq(0).text().trim();
+    const nise          = tr.find('td').eq(1).text().trim();
+    const consumo_kWh   = tr.find('td').eq(2).text().replace(' KW', '').trim();
+    const fecha_lectura = tr.find('td').eq(3).text().trim();
+    const fecha_corte   = tr.find('td').eq(4).text().trim();
+    const observaciones = tr.find('td').eq(5).text().trim();
+
+    $('#id').val(id);
+    $('#niseEditLectura').val(nise);
+    $('#periodo').val(periodo);
+    $('#consumo_kWh').val(consumo_kWh);
+    $('#fecha_lectura').val(fecha_lectura);
+    $('#fecha_corte').val(fecha_corte);
+    $('#tarifa_id').val('1');
+    $('#observaciones').val();
+
+    const modal = new bootstrap.Modal(document.getElementById('modalEditLectura'));
+    modal.show();
+}
 
 function getLectura(nise) {
     const PARAMS = nise
@@ -117,11 +179,10 @@ function cargarDatos(res) {
                 <td>${lectura.fecha_corte}</td>
                 <td class="text-break">${lectura.observaciones}</td>
                 <td>
-                <?php if ($_SESSION["correo"] == 'admin@ice.go.cr'): ?>
-                    <button data-bs-toggle="modal" data-bs-target="#modalEditLectura" class="btn-Editar btn btn-outline-warning" data-idLectura="${lectura.id}">
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#modalEditLectura" class="btn-edit-lectura btn btn-outline-warning"
+                    data-id="${lectura.id}">
                         <i class="fa-solid fa-pen-to-square"></i>
-                    </button>
-                <?php endif; ?>   
+                    </button>   
                 </td>
             </tr>
         `;
