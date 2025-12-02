@@ -10,33 +10,43 @@ loginRequerido()
     <div class="row">
         <?php if ($_SESSION["correo"] == 'admin@ice.go.cr'): ?>
             <?php include "shared/aside.php"; ?>
-        <?php endif; ?> 
+        <?php endif; ?>
         <section class="col">
             <div class="container">
                 <div class="m-4">
                     <h1>Bienvenidos a Agencia Virtual</h1>
                 </div>
+                <!-- INICIO SECCION CONSULTA NISE -->
                 <div class="card text-center">
                     <div class="card-header">
-                        Buscador
+                        <h3>Consulta Lecturas</h3>
                     </div>
-                    <!-- INICIO SECCION CONSULTA NISE -->
                     <div class="card-body ">
-                        <h5 class="card-title">Consulta NISE</h5>
+                        <h5 class="card-title">Ingresar NISE</h5>
                         <form id="buscarNise" class="d-flex" role="search">
                             <input class="form-control me-2" name="nise" id="nise" type="search" placeholder="-- Ej: 0000000 --" aria-label="Buscar" />
                             <button class="btn btn-outline-success me-2" type="submit" data-tipo="read">Buscar</button>
-                            <button class="btn btn-outline-success" type="submit" id="btn-add-nise" data-tipo="add">Generar<i class="fa-solid fa-bolt"></i></button>
+                            <?php if ($_SESSION["correo"] == 'admin@ice.go.cr'): ?>
+                                <button class="btn btn-outline-success" type="submit" id="btn-add-nise" data-tipo="add">Generar<i class="fa-solid fa-bolt"></i></button>
+                            <?php endif; ?>
                         </form>
                     </div>
-                    <!-- FIN SECCION CONSULTA NISE -->
                 </div>
+                <!-- FIN SECCION CONSULTA NISE -->
                 <!-- Inicio Formulario para consultar la facturacion de los clientes -->
                 <div class="container mt-4">
                     <h3 class="mb-3 text-center">Consulta de Facturación</h3>
+                    
                     <!-- Selector de periodo -->
                     <div class="card p-3 mb-4">
-                        <label><strong>Seleccione el periodo a consultar:</strong></label>
+                        <!-- si es admin deja escribir el nise a revisar la facturacion -->
+                    <?php if (isset($_SESSION["correo"]) && $_SESSION["correo"] === 'admin@ice.go.cr'): ?>
+                        <div class="mb-3">
+                            <label><strong>Consultar facturación por NISE:</strong></label>
+                            <input type="number" id="adminNise" class="form-control w-25" placeholder="Ingrese NISE del cliente">
+                        </div>
+                    <?php endif; ?>
+                    <label><strong>Seleccione el periodo a consultar:</strong></label>
                         <input type="month" id="periodo" class="form-control w-25">
                         <button id="btnBuscar" class="btn btn-primary mt-3 w-25">Buscar</button>
                     </div>
@@ -54,7 +64,7 @@ loginRequerido()
                     </div>
                 </div>
                 <!-- Fin del Formulario para consultar la facturacion de los clientes -->
-                </div>
+            </div>
 
         </section>
     </div>
@@ -75,7 +85,7 @@ loginRequerido()
                             <th>Periodo</th>
                             <th>Nise</th>
                             <th>Consumo</th>
-                            <th>F. Lectura  </th>
+                            <th>F. Lectura </th>
                             <th>F. Corte</th>
                             <th>Observaciones</th>
                             <th>Acciones</th>
@@ -221,5 +231,6 @@ loginRequerido()
 <!-- Pasar el correo del usuario a JavaScript -->
 <script>
     const usuarioCorreo = "<?= $_SESSION['correo'] ?>";
+    const esAdmin = (usuarioCorreo === "admin@ice.go.cr");
 </script>
 <script src="js/consulta_factura.js"></script>

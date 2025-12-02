@@ -5,7 +5,7 @@ $(document).ready(function(){
 
     $("#contactForm").on("submit", function(e){
         e.preventDefault();
-// Construye el payload con los datos del formulario
+
         let payload = {
             nise: $("#nise").val(),
             correo: $("#correo").val(),
@@ -22,7 +22,7 @@ $(document).ready(function(){
         }
 
         console.log("Payload enviado:", payload);
-// mensaje de la solicitud AJAX
+
         $.ajax({
             url: "http://localhost:8080/enviarContacto",
             method: "POST",
