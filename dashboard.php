@@ -24,7 +24,7 @@ loginRequerido()
                     <div class="card-body ">
                         <h5 class="card-title">Ingresar NISE</h5>
                         
-                        <form id="buscarNise"s role="search">  
+                        <form id="buscarNise" role="search">  
                             <div class="row g-2">
                                 <div class="col-12 col-md-8">
                                     <input class="form-control me-2" name="nise" id="nise" type="search" placeholder="-- Ej: 0000000 --" aria-label="Buscar" />
@@ -185,32 +185,32 @@ loginRequerido()
 
             <div class="modal-body">
                 <form id="crudEditLectura">
-                    <input type="hidden" id="id" name="id" value="">
+                    <input type="hidden" id="edit-id" name="id" value="">
 
                     <div class="mb-3">
                         <label for="nise" class="form-label">NISE</label>
-                        <input type="text" class="form-control" id="nise" name="nise" readonly>
+                        <input type="text" class="form-control" id="edit-nise" name="nise" readonly>
                     </div>
 
                     <div class="mb-3">
                         <label for="periodo" class="form-label">Periodo</label>
-                        <input type="date" class="form-control" id="periodo" name="periodo" required>
+                        <input type="date" class="form-control" id="edit-periodo" name="periodo" required>
                     </div>
                     <div class="mb-3">
                         <label for="consumo_kWh" class="form-label">Consumo (kWh)</label>
-                        <input type="number" class="form-control" id="consumo_kWh" name="consumo_kWh" step="0.01" min="0" required>
+                        <input type="number" class="form-control" id="edit-consumo_kWh" name="consumo_kWh" step="0.01" min="0" required>
                     </div>
                     <div class="mb-3">
                         <label for="fecha_lectura" class="form-label">Fecha de lectura</label>
-                        <input type="date" class="form-control" id="fecha_lectura" name="fecha_lectura" required>
+                        <input type="date" class="form-control" id="edit-fecha_lectura" name="fecha_lectura" required>
                     </div>
                     <div class="mb-3">
                         <label for="fecha_corte" class="form-label">Fecha de corte</label>
-                        <input type="date" class="form-control" id="fecha_corte" name="fecha_corte">
+                        <input type="date" class="form-control" id="edit-fecha_corte" name="fecha_corte">
                     </div>
                     <div class="mb-3">
                         <label for="tarifa_id" class="form-label">Tarifa</label>
-                        <select class="form-select" id="tarifa_id" name="tarifa_id" required>
+                        <select class="form-select" id="edit-tarifa_id" name="tarifa_id" required>
                             <option value="">Seleccione una tarifa</option>
                             <option value="1">Tarifa 1 - Residencial</option>
                             <option value="2">Tarifa 2 - Comercial</option>
@@ -220,7 +220,7 @@ loginRequerido()
                     <!-- Observaciones -->
                     <div class="mb-3">
                         <label for="observaciones" class="form-label">Observaciones</label>
-                        <textarea class="form-control" id="observaciones" name="observaciones" rows="2" maxlength="100"></textarea>
+                        <textarea class="form-control" id="edit-observaciones" name="observaciones" rows="2" maxlength="100"></textarea>
                     </div>
                 </form>
             </div>

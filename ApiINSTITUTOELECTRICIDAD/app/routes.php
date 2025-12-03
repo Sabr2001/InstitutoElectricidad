@@ -306,7 +306,7 @@ return function (App $app) {
             $sql = "SELECT * FROM lecturas where id=$id";
             $db = conexion();
             $db->SetFetchMode(ADODB_FETCH_ASSOC);
-            $res = $db->GetAll($sql);
+            $res = $db->GetRow($sql);
             $db->Close();
             $response->getBody()->write((json_encode($res)));
             return $response;

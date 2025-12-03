@@ -1,6 +1,5 @@
 
 
-
 $("#buscarNise").validate({
     rules: {
         nise: {
@@ -8,8 +7,8 @@ $("#buscarNise").validate({
         },
     },
     messages: {
-        nombrePermiso: {
-            required: "Ingrse un NISE valido",
+        nise: {
+            required: "Ingrese un NISE valido",
         },
     }
 });
@@ -21,7 +20,6 @@ $('#buscarNise').on('submit',function(e){
     const nise = $('#nise').val().trim();
 
     if(!nise){
-        alert('Ingrese un Nise válido')
         return;
     }
 
@@ -105,19 +103,19 @@ function editLectura(id, tr){
         },
         success: function (res) {
             console.log('LOGUEO DE RES: ',res);
-            console.log(res[0].nise);
+            console.log(res.nise);
 
 
             const modal = new bootstrap.Modal(document.getElementById('modalEditLectura'));
-            $('#id').val(res[0].id);
-            $('#nise').val(res[0].nise);
+            $('#edit-id').val(res.id);
+            $('#edit-nise').val(res.nise);
             
-            $('#periodo').val(res[0].periodo);
-            $('#consumo_kWh').val(res[0].consumo_kWh);
-            $('#fecha_lectura').val(res[0].fecha_lectura);
-            $('#fecha_corte').val(res[0].fecha_corte);
-            $('#tarifa_id').val('1');
-            $('#observaciones').val(res[0].observaciones);
+            $('#edit-periodo').val(res.periodo);
+            $('#edit-consumo_kWh').val(res.consumo_kWh);
+            $('#edit-fecha_lectura').val(res.fecha_lectura);
+            $('#edit-fecha_corte').val(res.fecha_corte);
+            $('#edit-tarifa_id').val('1');
+            $('#edit-observaciones').val(res.observaciones);
             modal.show();
         },
         error: function (xhr) {
@@ -158,7 +156,7 @@ function getLectura(nise) {
 
 $('#btnGuardarEditLectura').on('click', function(){
     console.log('ENTRE');
-    const id = $('#id').val().trim(); 
+    const id = $('#edit-id').val().trim(); 
     const PARAMS = $("#crudEditLectura").serialize();
     const URL = `http://localhost:8080/editLectura/${id}?${PARAMS}`;
 

@@ -61,7 +61,7 @@
 
         <!-- Noticia 1 -->
         <div class="card col-sm-12 col-md-6 col-lg-3 me-3 mt-3 p-4">
-            <img src="img/noticia-electricidad.jpg" class="card-img-top" alt="noticia electricidad">
+            <img src="img\ice_ini1.jpeg" class="card-img-top" alt="noticia electricidad">
             <div class="card-body text-center">
                 <h5 class="card-title">Expansión de Energía Renovable</h5>
                 <p class="card-text">El ICE inauguró nuevas plantas solares y eólicas para fortalecer la matriz eléctrica nacional.</p>
@@ -71,7 +71,7 @@
 
         <!-- Noticia 2 -->
         <div class="card col-sm-12 col-md-6 col-lg-3 me-3 mt-3 p-4">
-            <img src="img/noticia-telecom.jpg" class="card-img-top" alt="noticia telecomunicaciones">
+            <img src="img/ice_ini2.jpg" class="card-img-top" alt="noticia telecomunicaciones">
             <div class="card-body text-center">
                 <h5 class="card-title">Avances en Telecomunicaciones</h5>
                 <p class="card-text">Se amplió la cobertura de internet de alta velocidad en comunidades rurales bajo la marca kölbi.</p>
@@ -81,7 +81,7 @@
 
         <!-- Noticia 3 -->
         <div class="card col-sm-12 col-md-6 col-lg-3 me-3 mt-3 p-4">
-            <img src="img/noticia-agencia.jpg" class="card-img-top" alt="noticia agencia virtual">
+            <img src="img/ice_ini3.jpg" class="card-img-top" alt="noticia agencia virtual">
             <div class="card-body text-center">
                 <h5 class="card-title">Agencia Virtual Renovada</h5>
                 <p class="card-text">El ICE lanzó mejoras en su plataforma digital para facilitar trámites y pagos en línea.</p>
@@ -91,7 +91,7 @@
 
         <!-- Noticia 4 -->
         <div class="card col-sm-12 col-md-6 col-lg-3 me-3 mt-3 p-4">
-            <img src="img/noticia-sostenibilidad.jpg" class="card-img-top" alt="noticia sostenibilidad">
+            <img src="img/ice_ini4.jpg" class="card-img-top" alt="noticia sostenibilidad">
             <div class="card-body text-center">
                 <h5 class="card-title">Compromiso Ambiental</h5>
                 <p class="card-text">El ICE impulsa proyectos de electrificación rural y sostenibilidad para reducir la huella de carbono.</p>
