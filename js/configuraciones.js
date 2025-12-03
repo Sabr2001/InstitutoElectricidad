@@ -33,12 +33,24 @@ $('#btnNuevo').on('click', function () {
     // Resetear formulario
     $('#crudConfig')[0].reset();
     $('#id').val('');               // por si luego agregas editar
-    $('#crudModalLabel').text('Nueva Configuración');
+});
+
+$("#btnNuevo").click(function (e) {
+    if (!$("#crudConfig").valid()) 
+        return;
+    
+        Guardar();
+    //limpiar campos
+    $('#id').val('');  
+    $("#var_name").val("");
+    $("#valor_num").val("");
+    $("#unidad").val("");
+       
 });
 
 function Guardar() {
-    const PARAMS = $("#crudProducto").serialize();
-    const URL = `http://localhost:8080/guardarPermiso?${PARAMS}`;
+    const PARAMS = $("#crudConfig").serialize();
+    const URL = `http://localhost:8080/addConfig?${PARAMS}`;
 
     $.ajax({
         type: "POST",
