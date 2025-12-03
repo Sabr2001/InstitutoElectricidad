@@ -63,7 +63,7 @@ $pass = autenticado();
                         <li class="nav-item ">
                             <a class="nav-link <?php if ($nombreArchivo == "Reportes") echo 'active' ?>" href="estadisticas_consumo.php">Reportes</a>
                         </li>
-                        <?php if ($pass): ?>
+                        <?php if ($_SESSION["correo"] == 'admin@ice.go.cr'): ?>
                             <li class="nav-item visibleMobile">
                                 <a class="nav-link <?php if ($nombreArchivo == "clientes") echo 'active' ?>" href="admin-clientes.php">Clientes</a>
                             </li>
