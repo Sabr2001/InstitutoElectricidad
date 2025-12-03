@@ -178,7 +178,7 @@ $('#btnGuardarEditLectura').on('click', function(){
         error: function (xhr) {
             console.error('Error al editar lectura', xhr);
             alert('Ocurrió un error al editar la lectura');
-        },
+            },
         complete: function (params) {
             $("#loaderOverlay").css("display", "none");
         }

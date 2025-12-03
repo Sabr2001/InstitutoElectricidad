@@ -63,18 +63,19 @@ $pass = autenticado();
                         <li class="nav-item ">
                             <a class="nav-link <?php if ($nombreArchivo == "Reportes") echo 'active' ?>" href="estadisticas_consumo.php">Reportes</a>
                         </li>
-                        <?php if ($_SESSION["correo"] == 'admin@ice.go.cr'): ?>
-                            <li class="nav-item visibleMobile">
-                                <a class="nav-link <?php if ($nombreArchivo == "clientes") echo 'active' ?>" href="admin-clientes.php">Clientes</a>
-                            </li>
-                            <li class="nav-item visibleMobile">
-                                <a class="nav-link <?php if ($nombreArchivo == "config") echo 'active' ?>" href="configuraciones.php">Configs</a>
-                            </li>
-                            <li class="nav-item visibleMobile">
-                                <a class="nav-link <?php if ($nombreArchivo == "Permisos") echo 'active' ?>" href="admin-permisos.php">Permisos</a>
-                            </li>
+                        <?php if ($pass): ?>
+                            <?php if ($_SESSION["correo"] == 'admin@ice.go.cr'): ?>
+                                <li class="nav-item visibleMobile">
+                                    <a class="nav-link <?php if ($nombreArchivo == "clientes") echo 'active' ?>" href="admin-clientes.php">Clientes</a>
+                                </li>
+                                <li class="nav-item visibleMobile">
+                                    <a class="nav-link <?php if ($nombreArchivo == "config") echo 'active' ?>" href="configuraciones.php">Configs</a>
+                                </li>
+                                <li class="nav-item visibleMobile">
+                                    <a class="nav-link <?php if ($nombreArchivo == "Permisos") echo 'active' ?>" href="admin-permisos.php">Permisos</a>
+                                </li>
+                            <?php endif; ?>
                         <?php endif; ?>
-
                     </ul>
                 </div>
 
@@ -82,7 +83,6 @@ $pass = autenticado();
                 <div class="row">
                     <div class="col-12">
                         <a href="add_usuario.php" class="btn btn-danger btn-l">Crear Usuario</a>
-             
                         <a href="logout.php" class="btn btn-danger btn-l">Cerrar sesión</a>
                     </div>
                     <?php else: ?>
