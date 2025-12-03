@@ -2,7 +2,7 @@
     
 ?>
 
-<aside class="col-auto col-md-auto p-0 bg-body-tertiary min-vh-100 bgIceBackground sidebar-ice">
+<aside class="col-auto col-md-auto p-0 bg-body-tertiary min-vh-100 bgIceBackground sidebar-ice visibleDesk">
     <div class="d-flex flex-column flex-shrink-0 sidebar-ice" style="width: 4.5rem;">
         <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
             <li>
@@ -11,7 +11,7 @@
                 </a>
             </li>
             <li>
-                <a href="config.php" class="nav-link py-3 border-bottom rounded-0" title="config" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Orders" data-bs-original-title="Orders">
+                <a href="configuraciones.php" class="nav-link py-3 border-bottom rounded-0" title="config" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Orders" data-bs-original-title="Orders">
                     <i class="fa-solid fa-gear me-2"></i>
                 </a>
             </li>

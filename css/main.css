@@ -136,3 +136,20 @@ footer h3{
     font-weight: bold;
 }
 
+@media (max-width: 768px) {
+    .visibleMobile {
+        display: block;
+    }
+    .visibleDesk {
+        display: none;
+    }
+}
+
+@media (min-width: 768px) {
+    .visibleDesk {
+        display: block;
+    }
+        .visibleMobile {
+        display: none;
+    }
+}

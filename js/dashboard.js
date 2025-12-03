@@ -78,33 +78,6 @@ $('#btnGuardarAddLectura').on('click', function(){
     });
 })
 
-$('#btnGuardarEditLectura').on('click', function(){
-    console.log('ENTRE');
-    const id = $('#id').val().trim(); 
-    const PARAMS = $("#crudEditLectura").serialize();
-    const URL = `http://localhost:8080/editLectura/${id}?${PARAMS}`;
-
-    $.ajax({
-        type: "PUT",
-        url: URL,
-        beforeSend: function (params) {
-            $("#loaderOverlay").css("display", "block");
-        },
-        success: function (res) {
-            console.log(res);
-            alert("Datos Editados correctamente");
-            const modalElement = document.getElementById('modalEditLectura');
-            const modal = bootstrap.Modal.getInstance(modalElement);
-            modal.hide();
-        },
-        error: function (xhr) {
-            //Codigo a ejecutar peticion con errores
-        },
-        complete: function (params) {
-            $("#loaderOverlay").css("display", "none");
-        }
-    });
-})
 
 $(document).on('click', '.btn-edit-lectura', function (e) {
     e.preventDefault();
@@ -120,25 +93,41 @@ $(document).on('click', '.btn-edit-lectura', function (e) {
 })
 
 function editLectura(id, tr){
+    const PARAMS = id
+    const URL = `http://localhost:8080/obtenerLecturasById/${PARAMS}`;
 
-    const periodo       = tr.find('td').eq(0).text().trim();
-    const nise          = tr.find('td').eq(1).text().trim();
-    const consumo_kWh   = tr.find('td').eq(2).text().replace(' KW', '').trim();
-    const fecha_lectura = tr.find('td').eq(3).text().trim();
-    const fecha_corte   = tr.find('td').eq(4).text().trim();
-    const observaciones = tr.find('td').eq(5).text().trim();
+    $.ajax({
+        type: "GET",
+        url: URL,
+        dataType: "JSON",
+        beforeSend: function (params) {
+            $("#loaderOverlay").css("display", "block");
+        },
+        success: function (res) {
+            console.log('LOGUEO DE RES: ',res);
+            console.log(res[0].nise);
 
-    $('#id').val(id);
-    $('#niseEditLectura').val(nise);
-    $('#periodo').val(periodo);
-    $('#consumo_kWh').val(consumo_kWh);
-    $('#fecha_lectura').val(fecha_lectura);
-    $('#fecha_corte').val(fecha_corte);
-    $('#tarifa_id').val('1');
-    $('#observaciones').val();
 
-    const modal = new bootstrap.Modal(document.getElementById('modalEditLectura'));
-    modal.show();
+            const modal = new bootstrap.Modal(document.getElementById('modalEditLectura'));
+            $('#id').val(res[0].id);
+            $('#nise').val(res[0].nise);
+            
+            $('#periodo').val(res[0].periodo);
+            $('#consumo_kWh').val(res[0].consumo_kWh);
+            $('#fecha_lectura').val(res[0].fecha_lectura);
+            $('#fecha_corte').val(res[0].fecha_corte);
+            $('#tarifa_id').val('1');
+            $('#observaciones').val(res[0].observaciones);
+            modal.show();
+        },
+        error: function (xhr) {
+            //Codigo a ejecutar peticion con errores
+        },
+        complete: function (params) {
+            $("#loaderOverlay").css("display", "none");
+        }
+    });
+
 }
 
 function getLectura(nise) {
@@ -166,6 +155,35 @@ function getLectura(nise) {
         }
     });
 }
+
+$('#btnGuardarEditLectura').on('click', function(){
+    console.log('ENTRE');
+    const id = $('#id').val().trim(); 
+    const PARAMS = $("#crudEditLectura").serialize();
+    const URL = `http://localhost:8080/editLectura/${id}?${PARAMS}`;
+
+    $.ajax({
+        type: "PUT",
+        url: URL,
+        beforeSend: function (params) {
+            $("#loaderOverlay").css("display", "block");
+        },
+        success: function (res) {
+            console.log(res);
+            alert("Datos Editados correctamente");
+            const modalElement = document.getElementById('modalEditLectura');
+            const modal = bootstrap.Modal.getInstance(modalElement);
+            modal.hide();
+            location.reload;
+        },
+        error: function (xhr) {
+            //Codigo a ejecutar peticion con errores
+        },
+        complete: function (params) {
+            $("#loaderOverlay").css("display", "none");
+        }
+    });
+})
 
 function cargarDatos(res) {
     let filas = "";

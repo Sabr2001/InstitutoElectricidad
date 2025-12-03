@@ -60,20 +60,37 @@ $pass = autenticado();
                                 </a>
                             <?php endif; ?>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item ">
                             <a class="nav-link <?php if ($nombreArchivo == "Reportes") echo 'active' ?>" href="estadisticas_consumo.php">Reportes</a>
                         </li>
+                        <?php if ($pass): ?>
+                            <li class="nav-item visibleMobile">
+                                <a class="nav-link <?php if ($nombreArchivo == "clientes") echo 'active' ?>" href="admin-clientes.php">Clientes</a>
+                            </li>
+                            <li class="nav-item visibleMobile">
+                                <a class="nav-link <?php if ($nombreArchivo == "config") echo 'active' ?>" href="configuraciones.php">Configs</a>
+                            </li>
+                            <li class="nav-item visibleMobile">
+                                <a class="nav-link <?php if ($nombreArchivo == "Permisos") echo 'active' ?>" href="admin-permisos.php">Permisos</a>
+                            </li>
+                        <?php endif; ?>
 
                     </ul>
                 </div>
 
                 <?php if ($pass): ?>
-                    <a href="logout.php" class="btn btn-danger btn-l">Cerrar sesión</a>
-                <?php else: ?>
+                <div class="row">
+                    <div class="col-12">
+                        <a href="add_usuario.php" class="btn btn-danger btn-l">Crear Usuario</a>
+             
+                        <a href="logout.php" class="btn btn-danger btn-l">Cerrar sesión</a>
+                    </div>
+                    <?php else: ?>
                     <a href="contacto.php" class="btn backPrimaryLight btn-l me-2">Unirte</a>
                     <a href="dashboard.php" class="btn btn-danger btn-l">Ingresar</a>
 
                 <?php endif; ?>
+                </div>
             </div>
 
         </nav>

@@ -141,7 +141,7 @@ function getListaPermisos() {
             cargarDatos(res);
         },
         error: function (xhr) {
-            //Codigo a ejecutar peticion con errores
+            alert('No se pudieron Obtener Configuraciones')
         },
         complete: function (params) {
             $("#loaderOverlay").css("display", "none");

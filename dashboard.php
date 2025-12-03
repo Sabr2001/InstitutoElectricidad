@@ -23,12 +23,21 @@ loginRequerido()
                     </div>
                     <div class="card-body ">
                         <h5 class="card-title">Ingresar NISE</h5>
-                        <form id="buscarNise" class="d-flex" role="search">
-                            <input class="form-control me-2" name="nise" id="nise" type="search" placeholder="-- Ej: 0000000 --" aria-label="Buscar" />
-                            <button class="btn btn-outline-success me-2" type="submit" data-tipo="read">Buscar</button>
-                            <?php if ($_SESSION["correo"] == 'admin@ice.go.cr'): ?>
-                                <button class="btn btn-outline-success" type="submit" id="btn-add-nise" data-tipo="add">Generar<i class="fa-solid fa-bolt"></i></button>
-                            <?php endif; ?>
+                        
+                        <form id="buscarNise"s role="search">  
+                            <div class="row g-2">
+                                <div class="col-12 col-md-8">
+                                    <input class="form-control me-2" name="nise" id="nise" type="search" placeholder="-- Ej: 0000000 --" aria-label="Buscar" />
+                                </div>
+                                <div class="col-12 col-md-1 d-grid">
+                                    <button class="btn btn-outline-success me-2" type="submit" data-tipo="read">Buscar</button>
+                                </div>
+                                <?php if ($_SESSION["correo"] == 'admin@ice.go.cr'): ?>
+                                    <div class="col-12 col-md-1 d-grid">
+                                        <button class="btn btn-outline-success" type="submit" id="btn-add-nise" data-tipo="add">Generar<i class="fa-solid fa-bolt"></i></button>
+                                    </div>  
+                                <?php endif; ?>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -179,8 +188,8 @@ loginRequerido()
                     <input type="hidden" id="id" name="id" value="">
 
                     <div class="mb-3">
-                        <label for="niseEditLectura" class="form-label">NISE</label>
-                        <input type="text" class="form-control" id="niseEditLectura" name="niseEditLectura" readonly>
+                        <label for="nise" class="form-label">NISE</label>
+                        <input type="text" class="form-control" id="nise" name="nise" readonly>
                     </div>
 
                     <div class="mb-3">

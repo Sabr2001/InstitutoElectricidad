@@ -55,6 +55,9 @@ switch ($nombreArchivo) {
     case 'contacto_cliente';
         echo  "<script src='js/$nombreArchivo.js'></script>";
         break;
+    case 'configuraciones';
+        echo  "<script src='js/$nombreArchivo.js'></script>";
+        break;
     default:
         # code...
         break;
