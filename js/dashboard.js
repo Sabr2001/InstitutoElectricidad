@@ -170,12 +170,14 @@ $('#btnGuardarEditLectura').on('click', function(){
             console.log(res);
             alert("Datos Editados correctamente");
             const modalElement = document.getElementById('modalEditLectura');
-            const modal = bootstrap.Modal.getInstance(modalElement);
-            modal.hide();
-            location.reload;
+            if (modalElement) {
+                const modal = bootstrap.Modal.getOrCreateInstance(modalElement);
+                modal.hide();
+            }
         },
         error: function (xhr) {
-            //Codigo a ejecutar peticion con errores
+            console.error('Error al editar lectura', xhr);
+            alert('Ocurrió un error al editar la lectura');
         },
         complete: function (params) {
             $("#loaderOverlay").css("display", "none");
@@ -195,7 +197,7 @@ function cargarDatos(res) {
                 <td>${lectura.fecha_corte}</td>
                 <td class="text-break">${lectura.observaciones}</td>
                 <td>
-                    <button type="button" data-bs-toggle="modal" data-bs-target="#modalEditLectura" class="btn-edit-lectura btn btn-outline-warning"
+                    <button type="button" class="btn-edit-lectura btn btn-outline-warning"
                     data-id="${lectura.id}">
                         <i class="fa-solid fa-pen-to-square"></i>
                     </button>   
