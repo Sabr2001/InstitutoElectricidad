@@ -11,11 +11,6 @@
                 </a>
             </li>
             <li>
-                <a href="admin-usuarios.php" class="nav-link py-3 border-bottom rounded-0" title="usuarios" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Dashboard" data-bs-original-title="Dashboard">
-                    <i class="fa-solid fa-users"></i>
-                </a>
-            </li>
-            <li>
                 <a href="config.php" class="nav-link py-3 border-bottom rounded-0" title="config" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Orders" data-bs-original-title="Orders">
                     <i class="fa-solid fa-gear me-2"></i>
                 </a>
