@@ -14,10 +14,10 @@
     </div>
     <div class="col-md-6 col-lg-3">
         <h3>Contacto</h3>
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="https://www.facebook.com/GrupoICECR/?locale=es_LA" target="_blank">
             <i class="fa-brands fa-facebook"></i>
         </a>
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="https://www.youtube.com/@ICEPrensa" target="_blank">
             <i class="fa-brands fa-youtube"></i>
         </a>
     </div>
