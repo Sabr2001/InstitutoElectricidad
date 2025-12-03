@@ -532,111 +532,111 @@ return function (App $app) {
 
     //---------------------CRUD CONFIGURACIONES--------------------------//
 
-    $app->post('/addConfig', function ($request, $response) {
-        $fila = $request->getQueryParams();
-        $db = conexion();
-        $result = $db->AutoExecute("configuraciones", $fila, "INSERT");
-        $db->Close();
-        $response->getBody()->write(json_encode(["success" => $result]));
-        return $response->withHeader('Content-Type', 'application/json');
-    });
+        $app->post('/addConfig', function ($request, $response) {
+            $fila = $request->getQueryParams();
+            $db = conexion();
+            $result = $db->AutoExecute("configs", $fila, "INSERT");
+            $db->Close();
+            $response->getBody()->write(json_encode(["success" => $result]));
+            return $response->withHeader('Content-Type', 'application/json');
+        });
 
-    $app->put('/cambiarEstatusConfig/{id}/{activo}', function ($request, $response, $args) {
-        $id = $args['id'];
-        $activo = $args['activo'];
-        $db = conexion();
-        $data = ['activo' => $activo];
-        $res = $db->AutoExecute("configs", $data, "UPDATE", "id=$id");
-        $db->Close();
-        $response->getBody()->write(strval($res));
-        return $response;
-    });
+        $app->put('/cambiarEstatusConfig/{id}/{activo}', function ($request, $response, $args) {
+            $id = $args['id'];
+            $activo = $args['activo'];
+            $db = conexion();
+            $data = ['activo' => $activo];
+            $res = $db->AutoExecute("configs", $data, "UPDATE", "id=$id");
+            $db->Close();
+            $response->getBody()->write(strval($res));
+            return $response;
+        });
 
-    $app->get('/getConfigs', function ($request, $response, $args) {
-        $sql = "SELECT * FROM configs";
-        $db = conexion();
-        $db->SetFetchMode(ADODB_FETCH_ASSOC);
-        $res = $db->GetAll($sql);
-        $db->Close();
-        $response->getBody()->write((json_encode($res)));
-        return $response;
-    });
+        $app->get('/getConfigs', function ($request, $response, $args) {
+            $sql = "SELECT * FROM configs";
+            $db = conexion();
+            $db->SetFetchMode(ADODB_FETCH_ASSOC);
+            $res = $db->GetAll($sql);
+            $db->Close();
+            $response->getBody()->write((json_encode($res)));
+            return $response;
+        });
 
-    $app->get('/getValorConfig/{id}', function ($request, $response, $args) {
-        $id = $args['id'];
-        $db = conexion();
-        $db->SetFetchMode(ADODB_FETCH_ASSOC);
-        $sql = "SELECT c.valor_num 
-                FROM configs c
-                WHERE c.id = ? AND c.activo = 1";
-        $res = $db->GetRow($sql, [$id]);
-        $db->Close();
-        $response->getBody()->write((json_encode($res)));
-        return $response;
-    });
+        $app->get('/getValorConfig/{id}', function ($request, $response, $args) {
+            $id = $args['id'];
+            $db = conexion();
+            $db->SetFetchMode(ADODB_FETCH_ASSOC);
+            $sql = "SELECT c.valor_num 
+                    FROM configs c
+                    WHERE c.id = ? AND c.activo = 1";
+            $res = $db->GetRow($sql, [$id]);
+            $db->Close();
+            $response->getBody()->write((json_encode($res)));
+            return $response;
+        });
 
-    $app->delete('/eliminarConfig/{id}', function ($request, $response, $args) {
-        $id = $args['id'];
-        $db = conexion();
-        $result = $db->Execute("DELETE FROM configs WHERE id=?", [$id]);
-        $db->Close();
-        $response->getBody()->write((json_encode($result)));
-        return $response;
-    });
+        $app->delete('/eliminarConfig/{id}', function ($request, $response, $args) {
+            $id = $args['id'];
+            $db = conexion();
+            $result = $db->Execute("DELETE FROM configs WHERE id=?", [$id]);
+            $db->Close();
+            $response->getBody()->write((json_encode($result)));
+            return $response;
+        });
 
     //-------------------------------------------------------------------//
 
     //---------------------CRUD admin-lecturas--------------------------//
 
-    $app->get('/getLecturas', function ($request, $response) {
-        $db = conexion();
-        $sql = "SELECT * FROM lecturas ORDER BY periodo DESC, nise ASC";
-        $rows = $db->GetAll($sql);
-        $db->Close();
-        $response->getBody()->write(json_encode($rows));
-        return $response->withHeader('Content-Type', 'application/json');
-    });
+        $app->get('/getLecturas', function ($request, $response) {
+            $db = conexion();
+            $sql = "SELECT * FROM lecturas ORDER BY periodo DESC, nise ASC";
+            $rows = $db->GetAll($sql);
+            $db->Close();
+            $response->getBody()->write(json_encode($rows));
+            return $response->withHeader('Content-Type', 'application/json');
+        });
 
 
-    $app->get('/getLectura/{id}', function ($request, $response, $args) {
-        $id = $args['id'];
-        $db = conexion();
-        $db->SetFetchMode(ADODB_FETCH_ASSOC);
-        $sql = "SELECT * FROM lecturas WHERE id = ?";
-        $row = $db->GetRow($sql, [$id]);
-        $db->Close();
-        $response->getBody()->write(json_encode($row));
-        return $response->withHeader('Content-Type', 'application/json');
-    });
+        $app->get('/getLectura/{id}', function ($request, $response, $args) {
+            $id = $args['id'];
+            $db = conexion();
+            $db->SetFetchMode(ADODB_FETCH_ASSOC);
+            $sql = "SELECT * FROM lecturas WHERE id = ?";
+            $row = $db->GetRow($sql, [$id]);
+            $db->Close();
+            $response->getBody()->write(json_encode($row));
+            return $response->withHeader('Content-Type', 'application/json');
+        });
 
 
-    $app->post('/addLectura', function ($request, $response) {
-        $data = $request->getParsedBody();
-        $db = conexion();
-        $result = $db->AutoExecute("lecturas", $data, "INSERT");
-        $db->Close();
-        $response->getBody()->write(json_encode(["success" => $result]));
-        return $response->withHeader('Content-Type', 'application/json');
-    });
+        $app->post('/addLectura', function ($request, $response) {
+            $data = $request->getParsedBody();
+            $db = conexion();
+            $result = $db->AutoExecute("lecturas", $data, "INSERT");
+            $db->Close();
+            $response->getBody()->write(json_encode(["success" => $result]));
+            return $response->withHeader('Content-Type', 'application/json');
+        });
 
-    $app->put('/editarLectura/{id}', function ($request, $response, $args) {
-        $data = $request->getParsedBody();
-        $id = $args['id'];
-        $db = conexion();
-        $result = $db->AutoExecute("lecturas", $data, "UPDATE", "id=$id");
-        $db->Close();
-        $response->getBody()->write(json_encode(["success" => $result]));
-        return $response->withHeader('Content-Type', 'application/json');
-    });
+        $app->put('/editarLectura/{id}', function ($request, $response, $args) {
+            $data = $request->getParsedBody();
+            $id = $args['id'];
+            $db = conexion();
+            $result = $db->AutoExecute("lecturas", $data, "UPDATE", "id=$id");
+            $db->Close();
+            $response->getBody()->write(json_encode(["success" => $result]));
+            return $response->withHeader('Content-Type', 'application/json');
+        });
 
-    $app->delete('/eliminarLectura/{id}', function ($request, $response, $args) {
-        $id = $args['id'];
-        $db = conexion();
-        $result = $db->Execute("DELETE FROM lecturas WHERE id=?", [$id]);
-        $db->Close();
-        $response->getBody()->write(json_encode(["success" => $result]));
-        return $response->withHeader('Content-Type', 'application/json');
-    });
+        $app->delete('/eliminarLectura/{id}', function ($request, $response, $args) {
+            $id = $args['id'];
+            $db = conexion();
+            $result = $db->Execute("DELETE FROM lecturas WHERE id=?", [$id]);
+            $db->Close();
+            $response->getBody()->write(json_encode(["success" => $result]));
+            return $response->withHeader('Content-Type', 'application/json');
+        });
 
 
 

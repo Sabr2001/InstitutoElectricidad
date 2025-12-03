@@ -28,50 +28,53 @@ $(document).on('click', '.activar-config', function () {
     });
 });
 
-// Abrir modal en modo "nuevo"
 $('#btnNuevo').on('click', function () {
-    // Resetear formulario
-    $('#crudConfig')[0].reset();
-    $('#id').val('');               // por si luego agregas editar
+
+    $('#crudConfig')[0].reset();   
+    $('#id').val('');              
+    $('#crudModalLabel').text('Nueva Configuración');
 });
 
-$("#btnNuevo").click(function (e) {
-    if (!$("#crudConfig").valid()) 
+$('#btnGuardar').on('click', function () {
+    const var_name  = $('#var_name').val().trim();
+    const valor_num = $('#valor_num').val().trim();
+    if (!var_name || !valor_num) {
+        alert('Ingrese al menos nombre de variable y valor numérico');
         return;
-    
-        Guardar();
-    //limpiar campos
-    $('#id').val('');  
-    $("#var_name").val("");
-    $("#valor_num").val("");
-    $("#unidad").val("");
-       
+    }
+    Guardar();
 });
 
 function Guardar() {
-    const PARAMS = $("#crudConfig").serialize();
+    const PARAMS = $("#crudConfig").serialize();  
     const URL = `http://localhost:8080/addConfig?${PARAMS}`;
 
     $.ajax({
         type: "POST",
         url: URL,
-        beforeSend: function (params) {
+        beforeSend: function () {
             $("#loaderOverlay").css("display", "block");
         },
         success: function (res) {
-            console.log(res);
-            getListaPermisos();
-            alert("Datos Guardados correctamente");
+
+            alert("Configuración creada correctamente");
+
+            // Cerrar modal
+            const modalElement = document.getElementById('modalConfig');
+            const modal = bootstrap.Modal.getInstance(modalElement);
+            modal.hide();
+
+            // Recargar lista
+            getConfigs();
         },
-        error: function (xhr) {
-            //Codigo a ejecutar peticion con errores
+        error: function () {
+            alert("Error al crear la configuración");
         },
-        complete: function (params) {
+        complete: function () {
             $("#loaderOverlay").css("display", "none");
         }
     });
 }
-
 
 
 function getConfigs() {
@@ -125,4 +128,33 @@ function cargarDatos(res) {
     });
     console.log
     $("#indexConfigs").html(filas);
+}
+
+
+$("#tabla-config").on("click", ".btn-delete-config", function () {
+    const id = $(this).data("id");
+    eliminar(id);
+});
+
+function eliminar(id) {
+    const URL = `http://localhost:8080/eliminarConfig/${id}`;
+
+    $.ajax({
+        type: "DELETE",
+        url: URL,
+        beforeSend: function (params) {
+            $("#loaderOverlay").css("display", "block");
+        },
+        success: function (res) {
+            console.log(res);
+            getConfigs();
+            alert("Datos Datos eliminados correctamente");
+        },
+        error: function (xhr) {
+            //Codigo a ejecutar peticion con errores
+        },
+        complete: function (params) {
+            $("#loaderOverlay").css("display", "none");
+        }
+    });
 }

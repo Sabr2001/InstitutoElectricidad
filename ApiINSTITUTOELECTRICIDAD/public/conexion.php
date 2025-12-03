@@ -7,7 +7,7 @@
         $host = 'localhost';
         $user = 'root';
         $pass = '';
-        $db   = 'institutoelectricidad';
+        $db   = 'institutoelectricidad2';
 
         // Conexión
         $conector->Connect($host, $user, $pass, $db);

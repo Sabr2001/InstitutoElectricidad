@@ -43,6 +43,7 @@ function addLectura(nise){
     $('#consumo_kWh').val(0);
     $('#tarifa_id').val('1');
     $('#observaciones').val('');
+    $('#prov').val('');
     $('#id').val('');
 
     const modal = new bootstrap.Modal(document.getElementById('modalAddLectura'));
@@ -188,7 +189,11 @@ $('#btnGuardarEditLectura').on('click', function(){
 function cargarDatos(res) {
     let filas = "";
     $.each(res, function (i, lectura) {
+        
+        const provincia = getProvinciaNombre(lectura.provincia_id);
         filas += `
+        
+        pro
             <tr>
                 <td>${lectura.periodo}</td>
                 <td>${lectura.nise}</td>
@@ -196,6 +201,7 @@ function cargarDatos(res) {
                 <td>${lectura.fecha_lectura}</td>
                 <td>${lectura.fecha_corte}</td>
                 <td class="text-break">${lectura.observaciones}</td>
+                <td>${provincia}</td>
                 <td>
                     <button type="button" class="btn-edit-lectura btn btn-outline-warning"
                     data-id="${lectura.id}">
@@ -207,4 +213,40 @@ function cargarDatos(res) {
     });
     console.log
     $("#indexLectura").html(filas);
+}
+
+function getProvinciaNombre(id) {
+    switch (parseInt(id)) {
+        case 1: return "San José";
+        case 2: return "Alajuela";
+        case 3: return "Cartago";
+        case 4: return "Heredia";
+        case 5: return "Guanacaste";
+        case 6: return "Puntarenas";
+        case 7: return "Limón";
+        default: return "-";
+    }
+}
+
+function Eliminar(id) {
+    const URL = `http://localhost:8080/borrarPermiso/${id}`;
+
+    $.ajax({
+        type: "DELETE",
+        url: URL,
+        beforeSend: function (params) {
+            $("#loaderOverlay").css("display", "block");
+        },
+        success: function (res) {
+            console.log(res);
+            getListaPermisos();
+            alert("Datos Datos eliminados correctamente");
+        },
+        error: function (xhr) {
+            //Codigo a ejecutar peticion con errores
+        },
+        complete: function (params) {
+            $("#loaderOverlay").css("display", "none");
+        }
+    });
 }

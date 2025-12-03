@@ -25,9 +25,10 @@ loginRequerido();
                     </div>
 
                     <!-- Tabla configs -->
-                    <table class="table table-striped table-hover align-middle" id="tabla-configs">
+                    <table class="table table-striped table-hover align-middle" id="tabla-config">
                         <thead class="table-dark">
                             <tr>
+                                <th class="d-none">ID</th>
                                 <th>Nombre Variable (var_name)</th>
                                 <th>Valor Numérico (valor_num)</th>
                                 <th>Unidad</th>

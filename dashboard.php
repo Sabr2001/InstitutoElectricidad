@@ -97,6 +97,7 @@ loginRequerido()
                             <th>F. Lectura </th>
                             <th>F. Corte</th>
                             <th>Observaciones</th>
+                            <th>Provincia</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>

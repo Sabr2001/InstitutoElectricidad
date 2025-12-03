@@ -25,7 +25,7 @@ if (!$cedula) {
 }
 
 // Conexión a la BD
-$conexion = new mysqli("localhost", "root", "", "institutoelectricidad");
+$conexion = new mysqli("localhost", "root", "", "institutoelectricidad2");
 
 if ($conexion->connect_error) {
     $mensaje = "Error conectando a la base de datos.";
