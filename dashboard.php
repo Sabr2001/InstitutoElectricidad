@@ -112,6 +112,7 @@ loginRequerido()
 <div class="modal fade" id="modalAddLectura" tabindex="-1" aria-labelledby="modalAddLecturaLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
+
             <div class="modal-header">
                 <h5 class="modal-title" id="modalAddLecturaLabel">
                     Nueva Lectura <i class="fa-solid fa-bolt"></i>
@@ -121,29 +122,41 @@ loginRequerido()
 
             <div class="modal-body">
                 <form id="crudLectura">
+
+                    <!-- Hidden ID -->
                     <input type="hidden" id="id" name="id" value="">
 
+                    <!-- NISE -->
                     <div class="mb-3">
                         <label for="niseAddLectura" class="form-label">NISE</label>
                         <input type="text" class="form-control" id="niseAddLectura" name="niseAddLectura" readonly>
                     </div>
 
+                    <!-- Periodo -->
                     <div class="mb-3">
                         <label for="periodo" class="form-label">Periodo</label>
                         <input type="date" class="form-control" id="periodo" name="periodo" required>
                     </div>
+
+                    <!-- Consumo -->
                     <div class="mb-3">
                         <label for="consumo_kWh" class="form-label">Consumo (kWh)</label>
                         <input type="number" class="form-control" id="consumo_kWh" name="consumo_kWh" step="0.01" min="0" required>
                     </div>
+
+                    <!-- Fecha lectura -->
                     <div class="mb-3">
                         <label for="fecha_lectura" class="form-label">Fecha de lectura</label>
                         <input type="date" class="form-control" id="fecha_lectura" name="fecha_lectura" required>
                     </div>
+
+                    <!-- Fecha corte -->
                     <div class="mb-3">
                         <label for="fecha_corte" class="form-label">Fecha de corte</label>
                         <input type="date" class="form-control" id="fecha_corte" name="fecha_corte">
                     </div>
+
+                    <!-- Tarifa -->
                     <div class="mb-3">
                         <label for="tarifa_id" class="form-label">Tarifa</label>
                         <select class="form-select" id="tarifa_id" name="tarifa_id" required>
@@ -153,22 +166,35 @@ loginRequerido()
                         </select>
                     </div>
 
+                    <!-- Provincia -->
+                    <div class="mb-3">
+                        <label for="provincia_id" class="form-label">Provincia</label>
+                        <select class="form-select" id="provincia_id" name="provincia_id" required>
+                            <option value="">Seleccione provincia</option>
+                            <option value="1">San José</option>
+                            <option value="2">Alajuela</option>
+                            <option value="3">Cartago</option>
+                            <option value="4">Heredia</option>
+                            <option value="5">Guanacaste</option>
+                            <option value="6">Puntarenas</option>
+                            <option value="7">Limón</option>
+                        </select>
+                    </div>
+
                     <!-- Observaciones -->
                     <div class="mb-3">
                         <label for="observaciones" class="form-label">Observaciones</label>
                         <textarea class="form-control" id="observaciones" name="observaciones" rows="2" maxlength="100"></textarea>
                     </div>
+
                 </form>
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                    Cancelar
-                </button>
-                <button id="btnGuardarAddLectura" type="button" class="btn btn-primary">
-                    Guardar
-                </button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button id="btnGuardarAddLectura" type="button" class="btn btn-primary">Guardar</button>
             </div>
+
         </div>
     </div>
 </div>

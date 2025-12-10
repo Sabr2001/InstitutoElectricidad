@@ -75,7 +75,7 @@ try {
     $mail->Port = 587;
 
     $mail->setFrom("luis.zamora012@gmail.com", "Sistema Administrativo");
-    $mail->addAddress("luis.zamora012@gmail.com");
+    $mail->addAddress("santiagobonilla524@gmail.com");
 
     $mail->isHTML(true);
     $mail->Subject = "Solicitud de registro de usuario";
