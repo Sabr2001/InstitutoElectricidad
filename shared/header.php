@@ -49,20 +49,24 @@ $pass = autenticado();
                         <li class="nav-item">
                             <a class="nav-link <?php if ($nombreArchivo == "Soporte al Cliente") echo 'active' ?>" href="contacto_cliente.php">Soporte al Cliente</a>
                         </li>
-                        <li class="nav-item">
                             <?php if ($pass): ?>
-                                <a class="nav-link <?php if ($nombreArchivo == "dashboard") echo 'active' ?>" href="dashboard.php">
-                                    Agencia Virtual
-                                </a>
+                                <li class="nav-item">
+                                    <a class="nav-link <?php if ($nombreArchivo == "dashboard") echo 'active' ?>" href="dashboard.php">
+                                        Agencia Virtual
+                                    </a>
+                                </li>
+                                 <li class="nav-item ">
+                                    <a class="nav-link <?php if ($nombreArchivo == "Reportes") echo 'active' ?>" href="estadisticas_consumo.php">Reportes</a>
+                                </li>
                             <?php else: ?>
-                                <a class="nav-link <?php if ($nombreArchivo == "login") echo 'active' ?>" href="login.php">
-                                    Agencia Virtual
-                                </a>
+                                <li class="nav-item">
+                                    <a class="nav-link <?php if ($nombreArchivo == "login") echo 'active' ?>" href="login.php">
+                                        Agencia Virtual
+                                    </a>
+                                </li>
                             <?php endif; ?>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link <?php if ($nombreArchivo == "Reportes") echo 'active' ?>" href="estadisticas_consumo.php">Reportes</a>
-                        </li>
+                        
+                       
                         <?php if ($pass): ?>
                             <?php if ($_SESSION["correo"] == 'admin@ice.go.cr'): ?>
                                 <li class="nav-item visibleMobile">
