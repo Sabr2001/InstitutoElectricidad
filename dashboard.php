@@ -23,8 +23,8 @@ loginRequerido()
                     </div>
                     <div class="card-body ">
                         <h5 class="card-title">Ingresar NISE</h5>
-                        
-                        <form id="buscarNise" role="search">  
+
+                        <form id="buscarNise" role="search">
                             <div class="row g-2">
                                 <div class="col-12 col-md-8">
                                     <input class="form-control me-2" name="nise" id="nise" type="search" placeholder="-- Ej: 0000000 --" aria-label="Buscar" />
@@ -35,7 +35,7 @@ loginRequerido()
                                 <?php if ($_SESSION["correo"] == 'admin@ice.go.cr'): ?>
                                     <div class="col-12 col-md-1 d-grid">
                                         <button class="btn btn-outline-success" type="submit" id="btn-add-nise" data-tipo="add">Generar<i class="fa-solid fa-bolt"></i></button>
-                                    </div>  
+                                    </div>
                                 <?php endif; ?>
                             </div>
                         </form>
@@ -45,17 +45,17 @@ loginRequerido()
                 <!-- Inicio Formulario para consultar la facturacion de los clientes -->
                 <div class="container mt-4">
                     <h3 class="mb-3 text-center">Consulta de Facturación</h3>
-                    
+
                     <!-- Selector de periodo -->
                     <div class="card p-3 mb-4">
                         <!-- si es admin deja escribir el nise a revisar la facturacion -->
-                    <?php if (isset($_SESSION["correo"]) && $_SESSION["correo"] === 'admin@ice.go.cr'): ?>
-                        <div class="mb-3">
-                            <label><strong>Consultar facturación por NISE:</strong></label>
-                            <input type="number" id="adminNise" class="form-control w-25" placeholder="Ingrese NISE del cliente">
-                        </div>
-                    <?php endif; ?>
-                    <label><strong>Seleccione el periodo a consultar:</strong></label>
+                        <?php if (isset($_SESSION["correo"]) && $_SESSION["correo"] === 'admin@ice.go.cr'): ?>
+                            <div class="mb-3">
+                                <label><strong>Consultar facturación por NISE:</strong></label>
+                                <input type="number" id="adminNise" class="form-control w-25" placeholder="Ingrese NISE del cliente">
+                            </div>
+                        <?php endif; ?>
+                        <label><strong>Seleccione el periodo a consultar:</strong></label>
                         <input type="month" id="periodo" class="form-control w-25">
                         <button id="btnBuscar" class="btn btn-primary mt-3 w-25">Buscar</button>
                     </div>
@@ -73,6 +73,22 @@ loginRequerido()
                     </div>
                 </div>
                 <!-- Fin del Formulario para consultar la facturacion de los clientes -->
+                <!------------------------Tabla de solicitudes------------------------------->
+                <h4 class="p-2 mt-2 text-center">Mis Solicitudes</h4>
+                <table class="table table-bordered mt-3" id="tablaContacto">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Periodo</th>
+                            <th>Tipo</th>
+                            <th>Asunto</th>
+                            <th>Estado</th>
+                            <th>Respuesta</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <!------------------------Fin de la Tabla-------------------------------->
             </div>
 
         </section>
@@ -270,3 +286,9 @@ loginRequerido()
     const esAdmin = (usuarioCorreo === "admin@ice.go.cr");
 </script>
 <script src="js/consulta_factura.js"></script>
+
+<!-- Pasar el correo del usuario a JavaScript -->
+<script>
+    const usuarioCorreo = "<?= $_SESSION['correo'] ?>";
+</script>
+<script src="js/contacto_cliente.js"></script>
